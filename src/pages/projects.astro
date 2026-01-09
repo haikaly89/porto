@@ -1,0 +1,48 @@
+---
+// src/pages/projects.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Ambil data projects dari CMS
+const allProjects = await getCollection('projects');
+// Urutkan dari yang terbaru
+const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Projects">
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">My Projects</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    
+    {sortedProjects.map(project => (
+      /* UBAH DARI DIV MENJADI A (Link) */
+      <a href={`/projects/${project.slug}`} class="block bg-white border border-gray-200 dark:bg-[#2b2d35] dark:border-gray-700 rounded-xl p-6 hover:shadow-lg dark:hover:border-gray-500 transition group">
+        
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+            {project.data.title}
+          </h3>
+        </div>
+
+        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-sm">
+          {project.data.summary}
+        </p>
+
+        <div class="flex flex-wrap gap-2 text-xs mt-auto">
+          {project.data.tags.map(tag => (
+            /* Styling Tag otomatis (Warna Netral agar rapi) */
+            <span class="bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 px-2 py-1 rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </a>
+    ))}
+
+  </div>
+
+  {sortedProjects.length === 0 && (
+    <p class="text-center text-gray-500 mt-10">Belum ada proyek yang ditambahkan.</p>
+  )}
+
+</BaseLayout>

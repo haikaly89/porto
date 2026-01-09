@@ -1,0 +1,32 @@
+---
+// src/pages/blog/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog Archive">
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">All Blog Posts</h1>
+  
+  <div class="grid gap-8">
+    {sortedPosts.map(post => (
+      /* KARTU: Background Putih (border abu) di terang, Abu Gelap di gelap */
+      <a href={`/blog/${post.slug}`} class="block p-6 bg-white border border-gray-200 dark:bg-[#2b2d35] dark:border-transparent rounded-xl hover:border-gray-400 dark:hover:border-gray-500 transition group">
+        
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-2">
+          {post.data.title}
+        </h2>
+        
+        <p class="text-gray-500 text-sm mb-4">
+          {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+        </p>
+        
+        <p class="text-gray-700 dark:text-gray-300">
+          Klik untuk membaca selengkapnya...
+        </p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

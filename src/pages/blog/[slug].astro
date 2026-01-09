@@ -1,0 +1,41 @@
+---
+// src/pages/blog/[slug].astro
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// 1. Fungsi ini wajib ada di Astro (SSG) untuk generate semua halaman blog saat build
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+// 2. Ambil data artikel yang sedang dibuka
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title}>
+  <article class="prose prose-invert prose-lg mx-auto mt-10 mb-20">
+    
+    <header class="mb-10 text-center border-b border-gray-800 pb-8">
+      <h1 class="text-4xl font-bold text-white mb-4">{post.data.title}</h1>
+      <p class="text-gray-500 text-sm">
+        Published on {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </p>
+    </header>
+
+    <div class="text-gray-300 leading-relaxed">
+      <Content />
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-gray-800 text-center">
+      <a href="/" class="text-blue-400 hover:text-blue-300 hover:underline">
+        ← Kembali ke Home
+      </a>
+    </div>
+
+  </article>
+</BaseLayout>

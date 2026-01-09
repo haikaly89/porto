@@ -1,0 +1,108 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, getCollection } from 'astro:content';
+
+// 1. Ambil Data Profil
+const profile = await getEntry('profile', 'data');
+const { 
+  name = "Nama Belum Diisi", 
+  role = "Role Belum Diisi", 
+  bio = "", 
+  avatar, 
+  location 
+} = profile ? profile.data : {};
+
+// 2. Ambil Data Badges
+const allBadges = await getCollection('badges');
+
+// 3. Ambil Data Blog
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={name}>
+  
+  <section class="flex flex-col sm:flex-row items-start gap-8 mb-16">
+    
+    <div class="flex-1 w-full text-center sm:text-left">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">{name}</h1>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">{role}</p>
+
+      <div class="block sm:hidden w-48 mx-auto relative mb-8 group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
+        <img 
+          src={avatar || "https://placehold.co/400"} 
+          alt={name} 
+          class="relative w-full h-auto rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 object-cover aspect-square"
+        />
+        {location && <p class="text-center text-xs text-gray-500 mt-2">📍 {location}</p>}
+      </div>
+      <div class="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 leading-relaxed mb-6 mx-auto sm:mx-0">
+         <p class="whitespace-pre-line">{bio}</p>
+      </div>
+
+      <div class="flex gap-5 text-3xl mt-4 items-center justify-center sm:justify-start">
+        <a href="https://github.com/haikaly89" target="_blank" aria-label="GitHub Profile" class="text-gray-500 hover:text-[#333] dark:text-gray-400 dark:hover:text-white transition-colors">
+           <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/haikal-yusuf/" target="_blank" aria-label="LinkedIn Profile" class="text-gray-500 hover:text-[#0077b5] dark:text-gray-400 dark:hover:text-[#0a66c2] transition-colors">
+           <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="hidden sm:block w-48 flex-shrink-0 relative">
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
+        <img 
+          src={avatar || "https://placehold.co/400"} 
+          alt={name} 
+          class="relative w-full h-auto rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 object-cover aspect-square"
+        />
+      </div>
+      {location && <p class="text-center text-xs text-gray-500 mt-2">{location}</p>}
+    </div>
+
+  </section>
+
+  {allBadges.length > 0 && (
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Certifications & Badges</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {allBadges.map(badge => (
+          <div class="bg-white border border-gray-200 dark:bg-[#2b2d35] dark:border-gray-700 p-4 rounded-xl text-center hover:shadow-md dark:hover:border-gray-500 transition group cursor-default">
+            <div class="h-16 flex items-center justify-center mb-3">
+              {badge.data.logo ? (
+                <img src={badge.data.logo} alt={badge.data.name} class="max-h-full max-w-full group-hover:scale-110 transition"/>
+              ) : (
+                <span class="text-3xl">🏅</span>
+              )}
+            </div>
+            <h3 class="font-bold text-sm text-gray-900 dark:text-gray-200 leading-tight mb-1">{badge.data.name}</h3>
+            <p class="text-xs text-gray-500">{badge.data.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {sortedPosts.length > 0 && (
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Latest Posts</h2>
+      <div class="flex flex-col gap-4">
+        {sortedPosts.map(post => (
+          <a href={`/blog/${post.slug}`} class="group flex flex-col sm:flex-row justify-between items-baseline hover:bg-gray-100 dark:hover:bg-[#2b2d35] p-3 -mx-3 rounded-lg transition">
+            <span class="text-sm text-gray-500 font-mono w-32 shrink-0 mb-1 sm:mb-0">
+              {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </span>
+            <span class="text-gray-700 dark:text-gray-300 font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition flex-1">
+              {post.data.title}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+</BaseLayout>
