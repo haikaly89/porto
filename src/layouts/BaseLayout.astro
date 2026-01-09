@@ -1,12 +1,12 @@
 ---
 // src/layouts/BaseLayout.astro
-import '../styles/global.css'; // Pastikan path ini benar jika kamu punya file CSS global
+import '../styles/global.css'; // Pastikan path ini benar jika Anda memiliki file CSS global
 const { title = "Portfolio" } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     
@@ -38,15 +38,16 @@ const { title = "Portfolio" } = Astro.props;
 
   <body class="bg-gray-100 text-gray-900 dark:bg-[#1c1e26] dark:text-gray-200 font-roboto min-h-screen flex flex-col transition-colors duration-300">
     
-    <header class="w-full max-w-3xl mx-auto p-6 flex justify-end items-center text-sm font-medium text-gray-600 dark:text-gray-400">
+    <header class="w-full max-w-3xl mx-auto p-6 flex justify-between sm:justify-end items-center text-sm font-medium text-gray-600 dark:text-gray-400">
       <nav class="flex gap-4 sm:gap-6">
         <a href="/" class="hover:text-black dark:hover:text-white transition-colors">About</a>
         <a href="/blog" class="hover:text-black dark:hover:text-white transition-colors">Blog</a>
         <a href="/projects" class="hover:text-black dark:hover:text-white transition-colors">Projects</a>
         <a href="/cv" class="hover:text-black dark:hover:text-white transition-colors">CV</a>
+        <a href="/contact" class="hover:text-black dark:hover:text-white transition-colors">Contact</a>
       </nav>
       
-      <button id="themeToggle" class="ml-6 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+      <button id="themeToggle" class="ml-6 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle Dark Mode">
         <span class="hidden dark:inline text-yellow-500">☀</span>
         <span class="inline dark:hidden text-gray-600">🌙</span>
       </button>
@@ -56,7 +57,7 @@ const { title = "Portfolio" } = Astro.props;
       <slot />
     </main>
 
-    <footer class="text-center text-gray-500 text-xs py-8">
+    <footer class="text-center text-gray-500 text-xs py-8 border-t border-gray-200 dark:border-gray-800 w-full max-w-3xl mx-auto">
       © 2026 {title}. Built with Astro & Keystatic.
     </footer>
 
@@ -75,6 +76,12 @@ const { title = "Portfolio" } = Astro.props;
   </body>
 </html>
 
-<style>
-  body { font-family: 'Roboto', sans-serif; }
+<style is:global>
+  /* Menambahkan smooth scroll dan memastikan font Roboto diaplikasikan ke seluruh elemen */
+  html {
+    scroll-behavior: smooth;
+  }
+  body { 
+    font-family: 'Roboto', sans-serif; 
+  }
 </style>

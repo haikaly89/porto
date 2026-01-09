@@ -13,8 +13,10 @@ const {
   location 
 } = profile ? profile.data : {};
 
-// 2. Ambil Data Badges
-const allBadges = await getCollection('badges');
+// 2. Ambil Data Projects (PENGGANTI BADGES)
+const allProjects = await getCollection('projects');
+// Urutkan project dari yang terbaru berdasarkan tanggal
+const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 // 3. Ambil Data Blog
 const allPosts = await getCollection('posts');
@@ -23,36 +25,27 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
 
 <BaseLayout title={name}>
   
-  <section class="flex flex-col sm:flex-row items-start gap-8 mb-16">
+  <section class="flex flex-col sm:flex-row items-center sm:items-start gap-8 mb-16 text-center sm:text-left">
     
-    <div class="flex-1 w-full text-center sm:text-left">
+    <div class="flex-1 w-full">
       <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">{name}</h1>
       <p class="text-gray-600 dark:text-gray-400 mb-6">{role}</p>
-
-      <div class="block sm:hidden w-48 mx-auto relative mb-8 group">
-        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
-        <img 
-          src={avatar || "https://placehold.co/400"} 
-          alt={name} 
-          class="relative w-full h-auto rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 object-cover aspect-square"
-        />
-        {location && <p class="text-center text-xs text-gray-500 mt-2">📍 {location}</p>}
-      </div>
+      
       <div class="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 leading-relaxed mb-6 mx-auto sm:mx-0">
          <p class="whitespace-pre-line">{bio}</p>
       </div>
 
       <div class="flex gap-5 text-3xl mt-4 items-center justify-center sm:justify-start">
-        <a href="https://github.com/haikaly89" target="_blank" aria-label="GitHub Profile" class="text-gray-500 hover:text-[#333] dark:text-gray-400 dark:hover:text-white transition-colors">
+        <a href="https://github.com/" target="_blank" aria-label="GitHub Profile" class="text-gray-500 hover:text-[#333] dark:text-gray-400 dark:hover:text-white transition-colors">
            <i class="fa-brands fa-github"></i>
         </a>
-        <a href="https://www.linkedin.com/in/haikal-yusuf/" target="_blank" aria-label="LinkedIn Profile" class="text-gray-500 hover:text-[#0077b5] dark:text-gray-400 dark:hover:text-[#0a66c2] transition-colors">
+        <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn Profile" class="text-gray-500 hover:text-[#0077b5] dark:text-gray-400 dark:hover:text-[#0a66c2] transition-colors">
            <i class="fa-brands fa-linkedin"></i>
         </a>
       </div>
     </div>
 
-    <div class="hidden sm:block w-48 flex-shrink-0 relative">
+    <div class="w-48 sm:w-48 flex-shrink-0 relative">
       <div class="relative group">
         <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
         <img 
@@ -61,27 +54,39 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
           class="relative w-full h-auto rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 object-cover aspect-square"
         />
       </div>
-      {location && <p class="text-center text-xs text-gray-500 mt-2">{location}</p>}
+      {location && <p class="text-center text-xs text-gray-500 mt-2">📍 {location}</p>}
     </div>
-
   </section>
 
-  {allBadges.length > 0 && (
+  {sortedProjects.length > 0 && (
     <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Certifications & Badges</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {allBadges.map(badge => (
-          <div class="bg-white border border-gray-200 dark:bg-[#2b2d35] dark:border-gray-700 p-4 rounded-xl text-center hover:shadow-md dark:hover:border-gray-500 transition group cursor-default">
-            <div class="h-16 flex items-center justify-center mb-3">
-              {badge.data.logo ? (
-                <img src={badge.data.logo} alt={badge.data.name} class="max-h-full max-w-full group-hover:scale-110 transition"/>
-              ) : (
-                <span class="text-3xl">🏅</span>
-              )}
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Featured Projects</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {sortedProjects.map(project => (
+          /* KARTU PROJECT: Style Gelap & Elegan */
+          <a href={`/projects/${project.slug}`} class="flex flex-col h-full bg-white border border-gray-200 dark:bg-black dark:border-gray-800 p-6 rounded-2xl hover:shadow-xl dark:hover:border-gray-600 transition group">
+            
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+              {project.data.title}
+            </h3>
+            
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-8 flex-1 line-clamp-3">
+              {project.data.summary}
+            </p>
+            
+            <div class="flex justify-between items-end mt-auto pt-4 border-t border-transparent dark:group-hover:border-gray-800 transition">
+              
+              <span class="text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2 group-hover:underline">
+                  View Project <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+              </span>
+              
+              <div class="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                <i class="fa-solid fa-code text-lg"></i>
+              </div>
+
             </div>
-            <h3 class="font-bold text-sm text-gray-900 dark:text-gray-200 leading-tight mb-1">{badge.data.name}</h3>
-            <p class="text-xs text-gray-500">{badge.data.description}</p>
-          </div>
+          </a>
         ))}
       </div>
     </section>
