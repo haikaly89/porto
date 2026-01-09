@@ -1,49 +1,50 @@
 ---
 // src/pages/cv.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
 
-// DATA CV
-const cvData = {
-  name: "Haikal Y",
-  role: "Senior Cloud & DevOps Engineer",
-  email: "email@haikal.com",
-  phone: "+62 812-3456-7890",
-  location: "Magetan, Indonesia",
-  github: "github.com/haikal",
-  summary: "Senior Cloud & DevOps Engineer with 6+ years of experience architecting, automating, and optimizing public cloud solutions (AWS, Azure, GCP). Proven track record in cost optimization, security compliance, and leading cross-functional teams. Expert in IaC (Terraform) and CI/CD pipelines.",
+// 1. AMBIL DATA DARI CMS
+const cvEntry = await getEntry('cv', 'data');
+
+// Fallback data (Proteksi jika data di Keystatic Admin belum diisi)
+const cvData = cvEntry ? cvEntry.data : {
+  name: "Nama Belum Diisi",
+  role: "Isi di Keystatic Admin",
+  email: "-", 
+  phone: "-", 
+  location: "-", 
+  summary: "-",
+  experience: [], 
+  education: [], 
+  skills: []
 };
 ---
 
-<BaseLayout title="Curriculum Vitae">
+<BaseLayout title={`CV - ${cvData.name}`}>
   
   <div id="cv-wrapper" class="max-w-4xl mx-auto mb-20 print:block print:max-w-full print:m-0">
     
-    <div id="print-header" class="hidden print:block text-center border-b-2 border-black pb-4 mb-4">
+    <div class="hidden print:block text-center border-b-2 border-black pb-4 mb-4">
       <h1 class="text-3xl font-bold uppercase tracking-wide mb-1" style="font-family: 'Times New Roman', serif;">{cvData.name}</h1>
-      
       <div class="text-sm flex justify-center items-center gap-2 text-black" style="font-family: 'Times New Roman', serif;">
-        <span>{cvData.email}</span>
-        <span class="text-xs">◆</span>
-        <span>{cvData.phone}</span>
-        <span class="text-xs">◆</span>
+        <span>{cvData.email}</span><span class="text-xs">◆</span>
+        <span>{cvData.phone}</span><span class="text-xs">◆</span>
         <span>{cvData.location}</span>
       </div>
-      
-      <p class="mt-4 text-justify text-sm leading-relaxed text-black">
-        {cvData.summary}
-      </p>
+      <p class="mt-4 text-justify text-sm leading-relaxed text-black">{cvData.summary}</p>
     </div>
 
     <div class="print:hidden flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">CV</h1>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Curriculum Vitae</h1>
       <button onclick="window.print()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg cursor-pointer">
-        <i class="fa-solid fa-file-pdf"></i> Download ATS PDF
+        <i class="fa-solid fa-file-pdf"></i> Download PDF
       </button>
     </div>
 
     <section class="print:hidden mb-10 bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
       <div class="p-6 grid gap-y-3 text-sm">
         <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Name</span><span class="text-gray-600 dark:text-gray-400">{cvData.name}</span></div>
+        <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Role</span><span class="text-gray-600 dark:text-gray-400">{cvData.role}</span></div>
         <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Email</span><span class="text-gray-600 dark:text-gray-400">{cvData.email}</span></div>
         <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Summary</span><p class="text-gray-600 dark:text-gray-400">{cvData.summary}</p></div>
       </div>
@@ -55,32 +56,17 @@ const cvData = {
       </div>
       
       <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-8 print:block print:p-0">
-        <div class="print:mb-1 print:flex print:gap-2">
-          <h3 class="font-bold text-gray-900 dark:text-white text-sm mb-2 print:text-black print:mb-0 print:whitespace-nowrap">
-            <i class="fa-solid fa-server text-blue-500 print:hidden"></i> Compute:
-          </h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">
-            AWS EC2, Fargate, Lambda, Kubernetes (EKS), Docker.
-          </p>
-        </div>
-
-        <div class="print:mb-1 print:flex print:gap-2">
-          <h3 class="font-bold text-gray-900 dark:text-white text-sm mb-2 print:text-black print:mb-0 print:whitespace-nowrap">
-            <i class="fa-solid fa-code text-purple-500 print:hidden"></i> DevOps:
-          </h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">
-            Terraform, Ansible, Jenkins, GitHub Actions.
-          </p>
-        </div>
-
-        <div class="print:mb-1 print:flex print:gap-2">
-          <h3 class="font-bold text-gray-900 dark:text-white text-sm mb-2 print:text-black print:mb-0 print:whitespace-nowrap">
-            <i class="fa-solid fa-database text-green-500 print:hidden"></i> Database:
-          </h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">
-            PostgreSQL, DynamoDB, Redis, S3.
-          </p>
-        </div>
+        {cvData.skills.map(skill => (
+          <div class="print:mb-2 print:flex print:gap-2">
+            <h3 class="font-bold text-gray-900 dark:text-white text-sm mb-2 print:text-black print:mb-0 print:whitespace-nowrap">
+              {skill.icon && <i class={`${skill.icon} text-blue-500 print:hidden mr-2`}></i>}
+              {skill.category}:
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">
+              {skill.items}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
 
@@ -90,97 +76,104 @@ const cvData = {
       </div>
       
       <div class="p-6 flex flex-col gap-8 print:p-0 print:gap-4">
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 print:block">
-          <div class="sm:w-48 flex-shrink-0 print:w-full print:flex print:justify-between print:mb-0">
-            <h3 class="hidden print:block font-bold text-black text-md">Senior Cloud Engineer - Tech Corp</h3>
-            <span class="inline-block bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-bold px-2 py-1 rounded print:bg-transparent print:text-black print:p-0 print:font-normal print:italic">
-              2024 - Present
-            </span>
+        {cvData.experience.map(job => (
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 print:block">
+            
+            <div class="sm:w-48 flex-shrink-0 print:w-full print:flex print:justify-between print:mb-1">
+              <h3 class="hidden print:block font-bold text-black text-md">
+                {job.position} - {job.company}
+              </h3>
+              <span class="inline-block bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-bold px-2 py-1 rounded print:bg-transparent print:text-black print:p-0 print:font-normal print:italic">
+                {job.date}
+              </span>
+            </div>
+            
+            <div class="print:w-full">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white print:hidden">{job.position}</h3>
+              <p class="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3 print:hidden">{job.company}</p>
+              
+              <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-1 print:text-black print:ml-5">
+                {job.highlights.map(point => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div class="print:w-full">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white print:hidden">Junior Cloud Engineer</h3>
-            <p class="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3 print:hidden">Tech Company Corp.</p>
-            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-1 print:text-black print:ml-5">
-              <li>Migrated legacy infrastructure to AWS using Terraform and Pulumi.</li>
-              <li>Built observability stack (CloudWatch, X-Ray) reducing MTTR by 40%.</li>
-              <li>Designed ECS clusters with Fargate for zero-downtime releases.</li>
-            </ul>
-          </div>
-        </div>
-
-        <hr class="border-gray-200 dark:border-gray-700 print:hidden" />
-
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 print:block">
-          <div class="sm:w-48 flex-shrink-0 print:w-full print:flex print:justify-between print:mb-0">
-             <h3 class="hidden print:block font-bold text-black text-md">Freelance DevOps</h3>
-             <span class="inline-block bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 text-xs font-bold px-2 py-1 rounded print:bg-transparent print:text-black print:p-0 print:font-normal print:italic">
-              2023 - 2024
-            </span>
-          </div>
-          <div class="print:w-full">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white print:hidden">Freelance DevOps</h3>
-            <p class="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3 print:hidden">Self Employed</p>
-            <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-1 print:text-black print:ml-5">
-              <li>Configured Docker containers and automated Linux server provisioning.</li>
-              <li>Managed CI/CD pipelines for various clients using GitHub Actions.</li>
-            </ul>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
+
+    <section class="mb-10 bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm print:shadow-none print:border-none print:bg-transparent">
+      <div class="bg-gray-50 dark:bg-[#23252b] px-6 py-3 border-b border-gray-200 dark:border-gray-700 print:bg-transparent print:border-b-2 print:border-black print:p-0 print:mb-4">
+        <h2 class="font-bold text-gray-900 dark:text-white print:text-black print:uppercase print:text-lg">Education</h2>
+      </div>
+      <div class="p-6 print:p-0">
+        {cvData.education.map(edu => (
+           <div class="mb-4 print:flex print:justify-between">
+            <div>
+              <h3 class="font-bold text-gray-900 dark:text-white print:text-black">{edu.school}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">{edu.degree}</p>
+            </div>
+            <span class="text-xs text-gray-500 print:text-black print:italic">{edu.date}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
   </div>
 </BaseLayout>
 
 <style is:global>
   @media print {
-    /* 1. RESET GLOBAL */
+    /* Konfigurasi Halaman A4 */
     @page { 
       margin: 1.5cm; 
-      size: A4 portrait; 
+      size: A4; 
     }
     
+    /* Reset Styling Body untuk Print */
     body { 
       background: white !important; 
-      font-family: 'Times New Roman', Times, serif !important; 
+      font-family: 'Times New Roman', serif !important; 
+      color: black !important;
     }
-    
-    /* 2. SEMBUNYIKAN ELEMEN INTERAKTIF */
-    header, footer, nav, #themeToggle, button, hr { 
+
+    /* Sembunyikan Elemen Navigasi & UI Web */
+    header, footer, nav, #themeToggle, button { 
       display: none !important; 
     }
 
-    /* 3. RE-ORDERING MENGGUNAKAN FLEXBOX */
-    #cv-wrapper {
-      display: flex !important;
-      flex-direction: column !important;
-    }
-
-    #print-header { order: 1; display: block !important; } /* Header Profil Pertama */
-    #skills-section { order: 2; break-inside: avoid; margin-bottom: 1.5rem !important; } /* Skills Kedua */
-    #work-section { order: 3; } /* Experience Ketiga */
-
-    /* 4. STYLING TEKS ATS */
-    h1, h2, h3, p, span, li { 
-      color: black !important; 
-      background: transparent !important;
-    }
-
-    h2 {
-      border-bottom: 2px solid black !important;
-      margin-bottom: 8px !important;
-      padding-bottom: 2px !important;
-    }
-
-    p, li { 
-      line-height: 1.4 !important; 
-      text-align: justify; 
-      font-size: 11pt !important;
-    }
-
-    /* Memastikan list bullet muncul */
-    ul { list-style-type: disc !important; }
+    /* Penyesuaian Layout PDF */
+    #cv-wrapper { display: flex !important; flex-direction: column !important; }
+    h1, h2, h3, p, span, li { color: black !important; }
+    p, li { line-height: 1.4 !important; text-align: justify; }
     
-    /* Utility agar layout flex di dalam section (skills) berubah jadi inline untuk ATS */
-    .print\:flex { display: flex !important; }
+    /* Paksa Grid/Flex menjadi Block untuk kompatibilitas PDF */
+    .grid, .flex, .flex-row, .sm\:flex-row { 
+      display: block !important; 
+      width: 100% !important; 
+    }
+    
+    .flex-col.gap-8 > div { 
+      margin-bottom: 15px !important; 
+      break-inside: avoid; 
+    }
+    
+    /* Menghilangkan Box & Shadow bergaya UI Web */
+    section, div { 
+      border: none !important; 
+      box-shadow: none !important; 
+      background: transparent !important; 
+    }
+    
+    /* Menambah Border bawah pada tiap section ala CV Profesional */
+    section { 
+      border-bottom: 1px solid black !important; 
+      margin-bottom: 15px !important; 
+      padding-bottom: 10px !important;
+    }
+
+    #skills-section { order: 2; break-inside: avoid; }
+    #work-section { order: 3; }
   }
 </style>

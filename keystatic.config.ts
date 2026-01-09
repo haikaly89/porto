@@ -6,7 +6,7 @@ export default config({
     kind: 'local',
   },
 
-  // 1. DATA PROFIL (SINGLETONS)
+  // 1. DATA SINGLETONS (Profile & CV)
   singletons: {
     profile: singleton({
       label: 'Profile Settings',
@@ -14,7 +14,6 @@ export default config({
       schema: {
         name: fields.text({ label: 'Nama Lengkap' }),
         role: fields.text({ label: 'Jabatan / Role' }),
-        // Bio menggunakan text biasa + multiline sesuai permintaan
         bio: fields.text({
           label: 'Bio / Deskripsi',
           multiline: true, 
@@ -27,9 +26,61 @@ export default config({
         location: fields.text({ label: 'Lokasi (ex: Singapore)' }),
       },
     }),
+
+    cv: singleton({
+      label: 'CV Data',
+      path: 'src/content/cv/data',
+      schema: {
+        // A. Info Dasar
+        name: fields.text({ label: 'Nama Lengkap' }),
+        role: fields.text({ label: 'Role / Jabatan' }),
+        email: fields.text({ label: 'Email' }),
+        phone: fields.text({ label: 'No. HP' }),
+        location: fields.text({ label: 'Lokasi' }),
+        summary: fields.text({ label: 'Summary / Ringkasan Diri', multiline: true }),
+        
+        // B. Pengalaman Kerja
+        experience: fields.array(
+          fields.object({
+            position: fields.text({ label: 'Posisi' }),
+            company: fields.text({ label: 'Perusahaan' }),
+            date: fields.text({ label: 'Periode (ex: 2024 - Present)' }),
+            location: fields.text({ label: 'Lokasi Kerja' }),
+            summary: fields.text({ label: 'Deskripsi Singkat', multiline: true }),
+            highlights: fields.array(fields.text({ label: 'Poin Pencapaian' }), { 
+              label: 'Job Desc / Achievements' 
+            }),
+          }),
+          { 
+            label: 'Work Experience', 
+            itemLabel: props => `${props.fields.position.value} @ ${props.fields.company.value}` 
+          }
+        ),
+
+        // C. Edukasi
+        education: fields.array(
+          fields.object({
+            school: fields.text({ label: 'Nama Kampus/Sekolah' }),
+            degree: fields.text({ label: 'Gelar / Jurusan' }),
+            date: fields.text({ label: 'Tahun (ex: 2020 - 2024)' }),
+          }),
+          { label: 'Education', itemLabel: props => props.fields.school.value }
+        ),
+
+        // D. Skill
+        skills: fields.array(
+          fields.object({
+            category: fields.text({ label: 'Kategori (ex: DevOps)' }),
+            icon: fields.text({ label: 'FontAwesome Icon Class (ex: fa-solid fa-server)' }),
+            items: fields.text({ label: 'Daftar Skill (Pisahkan dengan koma)' }),
+          }),
+          { label: 'Skills', itemLabel: props => props.fields.category.value }
+        ),
+      },
+    }),
   },
 
-  // 2. DATA KOLEKSI (COLLECTIONS)
+  // 2. DATA COLLECTIONS (Posts, Badges, Projects)
   collections: {
     // A. Blog Posts
     posts: collection({
@@ -69,7 +120,7 @@ export default config({
       },
     }),
 
-    // C. Projects (TAMBAHAN BARU)
+    // C. Projects
     projects: collection({
       label: 'Projects',
       slugField: 'title',
