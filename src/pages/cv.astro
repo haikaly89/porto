@@ -6,96 +6,65 @@ import { getEntry } from 'astro:content';
 // 1. AMBIL DATA DARI CMS
 const cvEntry = await getEntry('cv', 'data');
 
-// Fallback data (Proteksi jika data di Keystatic Admin belum diisi)
+// Proteksi data jika Keystatic belum diisi
 const cvData = cvEntry ? cvEntry.data : {
   name: "Nama Belum Diisi",
   role: "Isi di Keystatic Admin",
-  email: "-", 
-  phone: "-", 
-  location: "-", 
+  contact: "-",
   summary: "-",
-  experience: [], 
-  education: [], 
-  skills: []
+  experience: [],
+  volunteer: [],
+  organization: [],
+  education: [],
+  skills: "",
+  certifications: []
 };
 ---
 
 <BaseLayout title={`CV - ${cvData.name}`}>
-  
-  <div id="cv-wrapper" class="max-w-4xl mx-auto mb-20 print:block print:max-w-full print:m-0">
+  <div id="cv-wrapper" class="max-w-4xl mx-auto mb-20 print:m-0 print:max-w-full">
     
-    <div class="hidden print:block text-center border-b-2 border-black pb-4 mb-4">
-      <h1 class="text-3xl font-bold uppercase tracking-wide mb-1" style="font-family: 'Times New Roman', serif;">{cvData.name}</h1>
-      <div class="text-sm flex justify-center items-center gap-2 text-black" style="font-family: 'Times New Roman', serif;">
-        <span>{cvData.email}</span><span class="text-xs">◆</span>
-        <span>{cvData.phone}</span><span class="text-xs">◆</span>
-        <span>{cvData.location}</span>
+    <div class="print:hidden flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+      <div>
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-2">{cvData.name}</h1>
+        <p class="text-lg text-blue-600 dark:text-blue-400 font-medium mb-1">{cvData.role}</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 font-mono">{cvData.contact}</p>
       </div>
-      <p class="mt-4 text-justify text-sm leading-relaxed text-black">{cvData.summary}</p>
-    </div>
 
-    <div class="print:hidden flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Curriculum Vitae</h1>
-      <button onclick="window.print()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg cursor-pointer">
-        <i class="fa-solid fa-file-pdf"></i> Download PDF
+      <button onclick="window.print()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition shadow-lg group cursor-pointer">
+        <i class="fa-solid fa-file-pdf group-hover:animate-bounce"></i> Download CV (PDF)
       </button>
     </div>
 
-    <section class="print:hidden mb-10 bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
-      <div class="p-6 grid gap-y-3 text-sm">
-        <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Name</span><span class="text-gray-600 dark:text-gray-400">{cvData.name}</span></div>
-        <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Role</span><span class="text-gray-600 dark:text-gray-400">{cvData.role}</span></div>
-        <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Email</span><span class="text-gray-600 dark:text-gray-400">{cvData.email}</span></div>
-        <div class="grid grid-cols-[100px_1fr] gap-4"><span class="font-bold text-gray-700 dark:text-gray-300">Summary</span><p class="text-gray-600 dark:text-gray-400">{cvData.summary}</p></div>
+    <div class="hidden print:block text-center border-b-2 border-black pb-4 mb-6">
+      <h1 class="text-3xl font-bold uppercase tracking-wide mb-1">{cvData.name}</h1>
+      <p class="text-md font-bold mb-2">{cvData.role}</p>
+      <div class="text-sm flex justify-center items-center gap-2 text-black">
+        <span>{cvData.contact}</span>
       </div>
+    </div>
+
+    <section class="mb-10 print:mb-6">
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 print:text-black print:border-black print:uppercase print:text-lg">Summary</h2>
+      <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-justify print:text-black print:text-sm">
+        {cvData.summary}
+      </p>
     </section>
 
-    <section id="skills-section" class="mb-10 bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm print:shadow-none print:border-none print:bg-transparent print:mb-4">
-      <div class="bg-gray-50 dark:bg-[#23252b] px-6 py-3 border-b border-gray-200 dark:border-gray-700 print:bg-transparent print:border-b-2 print:border-black print:p-0 print:mb-2">
-        <h2 class="font-bold text-gray-900 dark:text-white print:text-black print:uppercase print:text-lg">Skills</h2>
-      </div>
-      
-      <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-8 print:block print:p-0">
-        {cvData.skills.map(skill => (
-          <div class="print:mb-2 print:flex print:gap-2">
-            <h3 class="font-bold text-gray-900 dark:text-white text-sm mb-2 print:text-black print:mb-0 print:whitespace-nowrap">
-              {skill.icon && <i class={`${skill.icon} text-blue-500 print:hidden mr-2`}></i>}
-              {skill.category}:
-            </h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">
-              {skill.items}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section id="work-section" class="mb-10 bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm print:shadow-none print:border-none print:bg-transparent">
-      <div class="bg-gray-50 dark:bg-[#23252b] px-6 py-3 border-b border-gray-200 dark:border-gray-700 print:bg-transparent print:border-b-2 print:border-black print:p-0 print:mb-4">
-        <h2 class="font-bold text-gray-900 dark:text-white print:text-black print:uppercase print:text-lg">Experience</h2>
-      </div>
-      
-      <div class="p-6 flex flex-col gap-8 print:p-0 print:gap-4">
+    <section class="mb-10 print:mb-6">
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-6 print:text-black print:border-black print:uppercase print:text-lg">Experience</h2>
+      <div class="space-y-8 print:space-y-4">
         {cvData.experience.map(job => (
-          <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 print:block">
-            
-            <div class="sm:w-48 flex-shrink-0 print:w-full print:flex print:justify-between print:mb-1">
-              <h3 class="hidden print:block font-bold text-black text-md">
-                {job.position} - {job.company}
-              </h3>
-              <span class="inline-block bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-bold px-2 py-1 rounded print:bg-transparent print:text-black print:p-0 print:font-normal print:italic">
-                {job.date}
-              </span>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 print:block">
+            <div class="sm:w-1/4 print:w-full print:flex print:justify-between print:mb-1">
+              <span class="text-sm font-bold text-gray-900 dark:text-white block print:text-black print:text-md">{job.company}</span>
+              <span class="text-xs text-blue-600 dark:text-blue-400 font-mono block print:text-black print:italic">{job.date}</span>
+              <span class="text-xs text-gray-500 dark:text-gray-400 block mb-1 print:hidden">{job.location}</span>
             </div>
-            
-            <div class="print:w-full">
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white print:hidden">{job.position}</h3>
-              <p class="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3 print:hidden">{job.company}</p>
-              
-              <ul class="list-disc list-outside ml-4 text-sm text-gray-600 dark:text-gray-400 space-y-1 print:text-black print:ml-5">
-                {job.highlights.map(point => (
-                  <li>{point}</li>
-                ))}
+            <div class="sm:w-3/4 print:w-full">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 print:text-black print:text-sm print:mb-1">{job.position}</h3>
+              <ul class="list-disc list-outside ml-4 text-sm text-gray-700 dark:text-gray-300 space-y-1 print:text-black print:ml-5">
+                {job.highlights.map(point => <li>{point}</li>)}
               </ul>
             </div>
           </div>
@@ -103,77 +72,136 @@ const cvData = cvEntry ? cvEntry.data : {
       </div>
     </section>
 
-    <section class="mb-10 bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm print:shadow-none print:border-none print:bg-transparent">
-      <div class="bg-gray-50 dark:bg-[#23252b] px-6 py-3 border-b border-gray-200 dark:border-gray-700 print:bg-transparent print:border-b-2 print:border-black print:p-0 print:mb-4">
-        <h2 class="font-bold text-gray-900 dark:text-white print:text-black print:uppercase print:text-lg">Education</h2>
-      </div>
-      <div class="p-6 print:p-0">
-        {cvData.education.map(edu => (
-           <div class="mb-4 print:flex print:justify-between">
-            <div>
-              <h3 class="font-bold text-gray-900 dark:text-white print:text-black">{edu.school}</h3>
-              <p class="text-sm text-gray-600 dark:text-gray-400 print:text-black">{edu.degree}</p>
+    {cvData.volunteer && cvData.volunteer.length > 0 && (
+      <section class="mb-10 print:mb-6">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-6 print:text-black print:border-black print:uppercase print:text-lg">Volunteer Experience</h2>
+        <div class="space-y-8 print:space-y-4">
+          {cvData.volunteer.map(vol => (
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 print:block">
+               <div class="sm:w-1/4 print:w-full print:flex print:justify-between print:mb-1">
+                <span class="text-sm font-bold text-gray-900 dark:text-white block print:text-black">{vol.event}</span>
+                <span class="text-xs text-blue-600 dark:text-blue-400 font-mono print:text-black print:italic">{vol.date}</span>
+              </div>
+              <div class="sm:w-3/4 print:w-full">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 print:text-black print:text-sm print:mb-1">{vol.role}</h3>
+                <ul class="list-disc list-outside ml-4 text-sm text-gray-700 dark:text-gray-300 space-y-1 print:text-black print:ml-5">
+                  {vol.highlights.map(point => <li>{point}</li>)}
+                </ul>
+              </div>
             </div>
-            <span class="text-xs text-gray-500 print:text-black print:italic">{edu.date}</span>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {cvData.organization && cvData.organization.length > 0 && (
+      <section class="mb-10 print:mb-6">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-6 print:text-black print:border-black print:uppercase print:text-lg">Leadership & Activities</h2>
+        <div class="space-y-8 print:space-y-4">
+          {cvData.organization.map(org => (
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 print:block">
+               <div class="sm:w-1/4 print:w-full print:flex print:justify-between print:mb-1">
+                <span class="text-sm font-bold text-gray-900 dark:text-white block print:text-black">{org.name}</span>
+                <span class="text-xs text-blue-600 dark:text-blue-400 font-mono print:text-black print:italic">{org.date}</span>
+              </div>
+              <div class="sm:w-3/4 print:w-full">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 print:text-black print:text-sm print:mb-1">{org.role}</h3>
+                <ul class="list-disc list-outside ml-4 text-sm text-gray-700 dark:text-gray-300 space-y-1 print:text-black print:ml-5">
+                  {org.highlights.map(point => <li>{point}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="mb-10 print:mb-6">
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-6 print:text-black print:border-black print:uppercase print:text-lg">Education</h2>
+      <div class="space-y-6 print:space-y-3">
+        {cvData.education.map(edu => (
+          <div class="print:flex print:justify-between print:items-baseline">
+            <div class="flex justify-between items-baseline mb-1 print:block">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white print:text-black print:text-md">{edu.school}</h3>
+              <span class="text-xs text-blue-600 dark:text-blue-400 font-mono print:text-black print:hidden">{edu.date}</span>
+            </div>
+            <p class="text-md font-medium text-gray-700 dark:text-gray-300 mb-2 print:text-black print:text-sm">{edu.degree}</p>
+            <span class="hidden print:block text-xs text-black italic">{edu.date}</span>
+            {edu.details && (
+              <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed italic border-l-2 border-gray-300 dark:border-gray-600 pl-3 print:text-black print:border-none print:pl-0 print:not-italic print:text-xs">
+                {edu.details}
+              </p>
+            )}
           </div>
         ))}
       </div>
     </section>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 print:block print:space-y-6">
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 print:text-black print:border-black print:uppercase print:text-lg">Skills</h2>
+        <div class="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 whitespace-pre-line print:text-black print:text-sm">
+          {cvData.skills}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 print:text-black print:border-black print:uppercase print:text-lg">Certifications</h2>
+        <ul class="space-y-2 print:space-y-1">
+          {cvData.certifications.map(cert => (
+            <li class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 print:text-black">
+              <i class="fa-solid fa-certificate text-yellow-500 mt-0.5 print:hidden"></i>
+              <span>{cert}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
   </div>
 </BaseLayout>
 
 <style is:global>
   @media print {
-    /* Konfigurasi Halaman A4 */
     @page { 
       margin: 1.5cm; 
       size: A4; 
     }
     
-    /* Reset Styling Body untuk Print */
     body { 
       background: white !important; 
       font-family: 'Times New Roman', serif !important; 
       color: black !important;
     }
 
-    /* Sembunyikan Elemen Navigasi & UI Web */
-    header, footer, nav, #themeToggle, button { 
+    /* Sembunyikan elemen UI web */
+    header, footer, nav, #themeToggle, button, .print\:hidden { 
       display: none !important; 
     }
 
-    /* Penyesuaian Layout PDF */
-    #cv-wrapper { display: flex !important; flex-direction: column !important; }
-    h1, h2, h3, p, span, li { color: black !important; }
-    p, li { line-height: 1.4 !important; text-align: justify; }
-    
-    /* Paksa Grid/Flex menjadi Block untuk kompatibilitas PDF */
-    .grid, .flex, .flex-row, .sm\:flex-row { 
+    #cv-wrapper { 
       display: block !important; 
-      width: 100% !important; 
-    }
-    
-    .flex-col.gap-8 > div { 
-      margin-bottom: 15px !important; 
-      break-inside: avoid; 
-    }
-    
-    /* Menghilangkan Box & Shadow bergaya UI Web */
-    section, div { 
-      border: none !important; 
-      box-shadow: none !important; 
-      background: transparent !important; 
-    }
-    
-    /* Menambah Border bawah pada tiap section ala CV Profesional */
-    section { 
-      border-bottom: 1px solid black !important; 
-      margin-bottom: 15px !important; 
-      padding-bottom: 10px !important;
     }
 
-    #skills-section { order: 2; break-inside: avoid; }
-    #work-section { order: 3; }
+    h1, h2, h3, p, span, li { 
+      color: black !important; 
+    }
+    
+    /* Layout Reset untuk Print */
+    .grid, .flex { 
+      display: block !important; 
+    }
+    
+    section { 
+      border: none !important;
+      margin-bottom: 1.2rem !important;
+      break-inside: avoid;
+    }
+
+    /* Tambahkan garis pemisah antar section ala CV formal */
+    h2 {
+      border-bottom: 1px solid black !important;
+      margin-bottom: 0.5rem !important;
+      padding-bottom: 0.2rem !important;
+    }
   }
 </style>

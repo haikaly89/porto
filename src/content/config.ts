@@ -23,34 +23,47 @@ const badges = defineCollection({
   }),
 });
 
-// 3. Definisi CV (Tipe: Data)
+// 3. Definisi CV (Tipe: Data - Skema Terbaru)
 const cv = defineCollection({
   type: 'data',
   schema: z.object({
     name: z.string(),
     role: z.string(),
-    email: z.string(),
-    phone: z.string(),
-    location: z.string(),
+    contact: z.string(), // Menggabungkan email/phone/social
     summary: z.string(),
+    
     experience: z.array(z.object({
       position: z.string(),
       company: z.string(),
       date: z.string(),
       location: z.string(),
-      summary: z.string().optional(),
       highlights: z.array(z.string()),
     })),
+
+    volunteer: z.array(z.object({
+      role: z.string(),
+      event: z.string(),
+      date: z.string(),
+      location: z.string(),
+      highlights: z.array(z.string()),
+    })).optional(),
+
+    organization: z.array(z.object({
+      role: z.string(),
+      name: z.string(),
+      date: z.string(),
+      highlights: z.array(z.string()),
+    })).optional(),
+
     education: z.array(z.object({
       school: z.string(),
       degree: z.string(),
       date: z.string(),
+      details: z.string().optional(),
     })),
-    skills: z.array(z.object({
-      category: z.string(),
-      icon: z.string().optional(),
-      items: z.string(), // Akan di-split berdasarkan koma di frontend
-    })),
+
+    skills: z.string(), // Berubah menjadi string (List Manual) sesuai snippet kedua
+    certifications: z.array(z.string()),
   }),
 });
 

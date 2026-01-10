@@ -1,0 +1,70 @@
+---
+title: >-
+  Implementing Virtualized Microservices and AI Workloads on OpenStack Private
+  Cloud
+date: 2026-01-07
+summary: >-
+  This project demonstrates the design and deployment of a private cloud
+  infrastructure using OpenStack to host virtualized microservices and
+  high-performance AI workloads, offering a cost-effective open-source
+  alternative to expensive enterprise licenses.
+tags:
+  - Openstack
+  - Mongosh
+  - Jupyter
+  - Elastic
+  - Kibana
+---
+In the modern era of technology, high-performance computing has become a necessity. However, for students and small-scale developers, the high cost of enterprise software licenses can be a significant barrier. To address this challenge, my team and I embarked on a project to explore **OpenStack** powerful open-source as a cost-effective solution for running heavy workloads like Artificial Intelligence (AI).
+
+Our journey began on local workstations. We initially tested the environment using **DevStack** and **MicroStack**, which are great for quick prototyping. However, we soon realized that to truly understand the underlying system and gain full configuration control, we needed to perform a **manual installation from scratch**.
+
+We deployed several core services to ensure the cloud was functional:
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/Group%2063.png)
+
+- **Horizon:** The web-based dashboard used to manage and monitor the entire cloud infrastructure.
+- **Keystone:** The identity service that handles authentication and authorization for all users and services.
+- **Nova:** The compute engine responsible for managing and provisioning virtual machines (instances).
+- **Placement:** A service that tracks the inventory of available resources (CPU, RAM, Disk) to optimize VM allocation.
+- **Neutron:** The networking component that manages virtual networks, IP addresses, and connectivity.
+- **Glance:** The image service used to store and manage the virtual disk images needed to boot instances.
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+After configuring the network, API access, and images, we deployed three specialized Virtual Machines (VMs) to handle the AI workload:
+
+1. **VM 1 (Database):** Running **MongoDB** to store and manage the large datasets required for AI analysis.
+1. **VM 2 (AI Engine):** The core processing unit equipped with **Anaconda, Jupyter Notebook, and Python**, where the actual model training and analysis take place.
+1. **VM 3 (Monitoring):** Dedicated to system health and performance tracking to ensure the infrastructure remains stable.
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+The implementation was a success. We were able to run AI scripts and visualize the results directly within our private cloud environment. This project proved that building a high-performance infrastructure for AI doesn't have to be expensive. By using OpenStack, we were able to create a flexible, "from-scratch" private cloud that rivals commercial solutions in terms of functionality. This experience has deepened our understanding of cloud orchestration and the potential of open-source technology in the field of Artificial Intelligence.
+
+Graph Script Analisys
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+Dashboard Kibana
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+\
+API Service OpenStack
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+\
+Images
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+Floating IPs
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)
+
+\
+Network Topology
+
+![](/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png)

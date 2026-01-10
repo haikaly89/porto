@@ -33,21 +33,18 @@ export default config({
       schema: {
         // A. Info Dasar
         name: fields.text({ label: 'Nama Lengkap' }),
-        role: fields.text({ label: 'Role / Jabatan' }),
-        email: fields.text({ label: 'Email' }),
-        phone: fields.text({ label: 'No. HP' }),
-        location: fields.text({ label: 'Lokasi' }),
+        role: fields.text({ label: 'Role / Headline' }),
+        contact: fields.text({ label: 'Info Kontak (Email | HP | LinkedIn)' }),
         summary: fields.text({ label: 'Summary / Ringkasan Diri', multiline: true }),
         
         // B. Pengalaman Kerja
         experience: fields.array(
           fields.object({
             position: fields.text({ label: 'Posisi' }),
-            company: fields.text({ label: 'Perusahaan' }),
+            company: fields.text({ label: 'Perusahaan/Instansi' }),
             date: fields.text({ label: 'Periode (ex: 2024 - Present)' }),
-            location: fields.text({ label: 'Lokasi Kerja' }),
-            summary: fields.text({ label: 'Deskripsi Singkat', multiline: true }),
-            highlights: fields.array(fields.text({ label: 'Poin Pencapaian' }), { 
+            location: fields.text({ label: 'Lokasi' }),
+            highlights: fields.array(fields.text({ label: 'Poin Jobdesc' }), { 
               label: 'Job Desc / Achievements' 
             }),
           }),
@@ -57,24 +54,45 @@ export default config({
           }
         ),
 
-        // C. Edukasi
+        // C. Volunteer
+        volunteer: fields.array(
+          fields.object({
+            role: fields.text({ label: 'Peran' }),
+            event: fields.text({ label: 'Event/Organisasi' }),
+            date: fields.text({ label: 'Periode' }),
+            location: fields.text({ label: 'Lokasi' }),
+            highlights: fields.array(fields.text({ label: 'Poin Tugas' }), { label: 'Tugas' }),
+          }),
+          { label: 'Volunteer Experience', itemLabel: props => props.fields.event.value }
+        ),
+
+        // D. Organisasi (Leadership)
+        organization: fields.array(
+          fields.object({
+            role: fields.text({ label: 'Jabatan' }),
+            name: fields.text({ label: 'Nama Organisasi' }),
+            date: fields.text({ label: 'Periode' }),
+            highlights: fields.array(fields.text({ label: 'Poin Tugas' }), { label: 'Tugas' }),
+          }),
+          { label: 'Organizations', itemLabel: props => props.fields.name.value }
+        ),
+
+        // E. Edukasi
         education: fields.array(
           fields.object({
-            school: fields.text({ label: 'Nama Kampus/Sekolah' }),
+            school: fields.text({ label: 'Kampus / Sekolah' }),
             degree: fields.text({ label: 'Gelar / Jurusan' }),
-            date: fields.text({ label: 'Tahun (ex: 2020 - 2024)' }),
+            date: fields.text({ label: 'Periode (ex: 2020 - 2024)' }),
+            details: fields.text({ label: 'Detail (IPK/Mata Kuliah)', multiline: true }),
           }),
           { label: 'Education', itemLabel: props => props.fields.school.value }
         ),
 
-        // D. Skill
-        skills: fields.array(
-          fields.object({
-            category: fields.text({ label: 'Kategori (ex: DevOps)' }),
-            icon: fields.text({ label: 'FontAwesome Icon Class (ex: fa-solid fa-server)' }),
-            items: fields.text({ label: 'Daftar Skill (Pisahkan dengan koma)' }),
-          }),
-          { label: 'Skills', itemLabel: props => props.fields.category.value }
+        // F. Skills & Certifications
+        skills: fields.text({ label: 'Skills (List Manual)', multiline: true }),
+        certifications: fields.array(
+          fields.text({ label: 'Nama Sertifikat' }), 
+          { label: 'Certifications' }
         ),
       },
     }),

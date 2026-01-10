@@ -1,0 +1,92 @@
+name: Haikal Yusuf Azzam
+role: Internet Engineering Student
+contact: haikalyusuf89@gmail.com | linkedin.com/in/haikal-yusuf/ | github.com/haikaly89
+summary: Haikal Yusuf Azzam is an Internet Engineering student currently enrolled in the third year, majoring Internet Engineering Technology at Universitas Gadjah Mada. I have strong interest in information technology, especially in programming, physical and cloud infrastructure, network, security, and AI-driven solutions. I have completed training programs with institutions such as Cisco, AWS, Digitalent, Dicoding, Samsung Innovation Campus, Skilvul, and Oracle.
+
+experience:
+  - position: Laboratory Assistant Basic Programming Python
+    company: UNIVERSITAS GADJAH MADA
+    date: Aug 2024 - Dec 2024 | Aug 2025 - Dec 2025
+    location: Yogyakarta
+    highlights:
+      - Support instructors in running Python programming lab sessions for students.
+      - Help with grading assignments, projects Python, providing constructive feedback to improve students' understanding and skills.
+      - Develop practice exercises that align with the Python programming curriculum.
+      - Observe students' work, offer guidance, and provide feedback.
+  - position: Laboratory Assistant Object Oriented Programming
+    company: UNIVERSITAS GADJAH MADA
+    date: Feb 2025 - Jun 2025
+    location: Yogyakarta
+    highlights:
+      - Mentored students in applying Object-Oriented Programming (OOP) principles (Encapsulation, Inheritance, Polymorphism).
+      - Co-designed practical programming assignments focused on OOP.
+      - Evaluated student code to OOP principles and providing feedback.
+  - position: CSIRT Intern (Security Development)
+    company: KAMISANDI DINAS KOMUNIKASI DAN INFORMATIKA DIY
+    date: Dec 2024 - Feb 2025
+    location: Yogyakarta
+    highlights:
+      - Developing an API to assess password security levels in a login system.
+      - Developing an API for web header scanning and security assessment.
+      - Creating materials and conducting lab experiments for penetration testing.
+
+volunteer:
+  - role: Master of Ceremonies & Technical Division
+    event: OPENINFRA DAYS INDONESIA 2025
+    date: Apr 2025 - Jul 2025
+    location: Yogyakarta
+    highlights:
+      - Hosted and facilitated the OID 2025 event (400+ attendees).
+      - Collaborated with event organizers to adjust the script and schedule in real-time.
+      - Coordinated with the logistics team for technical requirements.
+  - role: AI-volution AI Ambassador
+    event: AI-VOLUTION (US EMBASSY & BIJI-BIJI)
+    date: Jun 2025 - Sep 2025
+    location: Yogyakarta
+    highlights:
+      - Developed strategies to share AI knowledge and foster collaboration.
+      - Cultivated leadership skills regarding AI for social good.
+      - Learned effective use of digital platforms for community engagement.
+
+organization:
+  - role: Staff Media & Journalism
+    name: UNIT PENALARAN ILMIAH INTERDISIPLINER (UPII)
+    date: Feb 2024 - Present
+    highlights:
+      - Designed and implemented digital content.
+      - Documented the organization's activities through photos and videos.
+  - role: Head of Technical Division (BSO PALAPA)
+    name: UNIT PENALARAN ILMIAH INTERDISIPLINER (UPII)
+    date: Apr 2024 - Mar 2025
+    highlights:
+      - Ensure the magazine design is in accordance with the predetermined concept.
+      - Check the completeness and accuracy of the content.
+  - role: Head / Staff of Strategic Research and Advocacy
+    name: FORKOM TRI
+    date: Feb 2024 - Present
+    highlights:
+      - Lead and supervise in identifying key academic challenges faced by students.
+      - Offered solutions and suggestions to address student problems based on research.
+      - Mediated discussions between students and prodi.
+
+education:
+  - school: UNIVERSITAS GADJAH MADA
+    degree: Internet Engineering Technology
+    date: Jul 2023 - Jul 2027 (Expected)
+    details: Computer Programming & OOP, AI, Database Systems, Network Design, Wireless Technology, Fiber Optic, Information Security, IoT Design, Embedded Systems.
+
+skills: "Technical: Programming (Python, Bash Scripting), Infrastructure (Linux Ubuntu, OpenStack, Docker), Networking & Security, IoT, Web Development (Basic).\nSoft Skills: Problem Solving, Analytical Thinking, Event Management, Research & Documentation, Adaptability.\nLanguages: English & Indonesia (Native)."
+
+certifications:
+  - "Generative AI for Educators with Gemini Certificate (Google, 2025)"
+  - "Microsoft Certified: Azure AI Fundamentals (Microsoft, 2025)"
+  - "CCNA: Enterprise Networking, Security, and Automation (Cisco, 2025)"
+  - "CyberOps Associate (Cisco, 2025)"
+  - "Data Storage (Huawei, 2025)"
+  - "AWS Academy Graduate - Cloud Architecting (AWS, 2024)"
+  - "AWS Academy Graduate - Cloud Foundations (AWS, 2024)"
+  - "CCNA: Switching, Routing, and Wireless Essentials (Cisco, 2024)"
+  - "Career Essentials in Generative AI (Microsoft & LinkedIn, 2024)"
+  - "Data Analytics Essentials (Cisco, 2024)"
+  - "Introduction to Data Science (Cisco, 2023)"
+  - "Cyber Threat Management (Cisco, 2023)"

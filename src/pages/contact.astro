@@ -16,27 +16,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div>
           <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Let's Connect</h2>
           <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-            Tertarik berkolaborasi atau punya pertanyaan seputar Cloud & DevOps? Kirim pesan, dan saya akan membalas secepatnya.
+             Please send me a message if you have any questions or collaboration opportunities. I will reply to your message as soon as possible.
           </p>
           
           <div class="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 mb-4">
             <i class="fa-solid fa-envelope mt-1 text-blue-600 dark:text-blue-400"></i>
-            <span>email@haikal.com</span>
+            <span>haikalyusuf89@gmail.com</span>
           </div>
 
           <div class="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
             <i class="fa-solid fa-location-dot mt-1 text-blue-600 dark:text-blue-400"></i>
-            <span>Magetan, Indonesia</span>
+            <span>Indonesia</span>
           </div>
         </div>
 
         <div class="mt-8">
           <p class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Follow Me</p>
           <div class="flex gap-4 text-xl">
-            <a href="https://github.com/" target="_blank" class="text-gray-400 hover:text-black dark:hover:text-white transition">
+            <a href="https://github.com/haikaly89" target="_blank" aria-label="Kunjungi profil GitHub saya" class="text-gray-400 hover:text-black dark:hover:text-white transition">
               <i class="fa-brands fa-github"></i>
             </a>
-            <a href="https://linkedin.com/" target="_blank" class="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">
+
+            <a href="https://www.linkedin.com/in/haikal-yusuf/" target="_blank" aria-label="Kunjungi profil LinkedIn saya" class="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">
               <i class="fa-brands fa-linkedin"></i>
             </a>
           </div>
@@ -46,8 +47,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <div class="w-full md:w-2/3 p-8">
         
-        <form action="https://formspree.io/f/KODE_UNIK_KAMU" method="POST" class="space-y-6">
+        <form action="https://formspree.io/f/mlggrrpl" method="POST" class="space-y-6">
           
+          <input type="hidden" name="_subject" value="Pesan Baru dari Portfolio Haikal Yusuf" />
+          
+          <input type="hidden" name="_next" value="https://haikalyusuf.com/thanks" />
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama</label>

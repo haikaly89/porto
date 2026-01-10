@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Message Sent">
+  <div class="max-w-2xl mx-auto mt-20 mb-20 px-4 text-center">
+    <div class="bg-white dark:bg-[#2b2d35] border border-gray-200 dark:border-gray-700 rounded-2xl p-10 shadow-sm">
+      <div class="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="fa-solid fa-check text-4xl text-green-600 dark:text-green-400"></i>
+      </div>
+      
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Terima Kasih!</h1>
+      <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg">
+        Pesan Anda telah berhasil terkirim. Saya akan segera menghubungi Anda kembali melalui email.
+      </p>
+
+      <a 
+        href="/" 
+        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-lg transition shadow-md"
+      >
+        <i class="fa-solid fa-arrow-left text-sm"></i>
+        Kembali ke Beranda
+      </a>
+    </div>
+  </div>
+</BaseLayout>
