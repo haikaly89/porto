@@ -13,36 +13,80 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+
+// Attempt to find the first image URL from the markdown body to use as a Hero Image
+const imageMatch = project.body ? project.body.match(/!\[.*?\]\((.*?)\)/) : null;
+const heroImage = project.data.cover || (imageMatch ? imageMatch[1] : null);
 ---
 
-<BaseLayout title={project.data.title}>
-  <div class="max-w-3xl mx-auto mt-10 mb-20">
+<BaseLayout title={project.data.title} wide={true}>
+  <div class="max-w-5xl mx-auto mt-10 mb-20">
     
-    <a href="/projects" class="inline-flex items-center text-sm text-gray-500 hover:text-blue-500 mb-8 transition">
-      ← Back to Projects
+    <a href="/projects" class="group inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 mb-8 transition-colors">
+      <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">←</span> Back to Projects
     </a>
 
-    <header class="mb-10 border-b border-gray-200 dark:border-gray-800 pb-8">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{project.data.title}</h1>
-      
-      <div class="flex flex-wrap gap-4 items-center justify-between">
-        <span class="text-gray-500 text-sm">
-          {project.data.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
-        </span>
+    <!-- Hero Section -->
+    <header class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-start animate-fade-in">
+      <div class="order-2 lg:order-1">
         
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2 mb-6">
           {project.data.tags.map(tag => (
-            <span class="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 px-2 py-1 rounded text-xs border border-gray-200 dark:border-gray-700">
+            <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full">
               {tag}
             </span>
           ))}
         </div>
+
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight">
+          {project.data.title}
+        </h1>
+        
+        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+          {project.data.summary}
+        </p>
+
+        <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 pt-6">
+            <div class="flex items-center">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <time datetime={project.data.date.toISOString()}>
+                    {project.data.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
+                </time>
+            </div>
+            <!-- Add more metadata here if needed -->
+        </div>
       </div>
+
+      {heroImage && (
+        <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl max-w-sm w-full group cursor-default">
+                <img 
+                    src={heroImage} 
+                    alt={project.data.title} 
+                    class="object-cover w-full h-auto transform transition duration-700 hover:scale-105"
+                />
+                <div class="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl"></div>
+            </div>
+        </div>
+      )}
     </header>
 
-    <article class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-      <Content />
-    </article>
+    <!-- Content Section -->
+    <div class="bg-white dark:bg-[#1c1e26] rounded-3xl md:p-10">
+        <article class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 prose-img:rounded-2xl prose-img:shadow-xl prose-img:mx-auto prose-img:max-w-full md:prose-img:max-w-[50%] prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-500 prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gray-50 dark:prose-blockquote:bg-gray-800/50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:rounded-r-lg">
+        <Content />
+        </article>
+    </div>
 
   </div>
 </BaseLayout>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+</style>

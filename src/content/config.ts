@@ -84,6 +84,7 @@ const projects = defineCollection({
     date: z.date(),
     summary: z.string(),
     tags: z.array(z.string()), 
+    cover: z.string().optional(),
   }),
 });
 

@@ -1,7 +1,8 @@
 ---
 // src/layouts/BaseLayout.astro
 import '../styles/global.css'; // Pastikan path ini benar jika Anda memiliki file CSS global
-const { title = "Portfolio" } = Astro.props;
+const { title = "Portfolio", wide = false } = Astro.props;
+const containerMaxWidth = wide ? "max-w-5xl" : "max-w-3xl";
 ---
 
 <html lang="en">
@@ -38,7 +39,7 @@ const { title = "Portfolio" } = Astro.props;
 
   <body class="bg-gray-100 text-gray-900 dark:bg-[#1c1e26] dark:text-gray-200 font-roboto min-h-screen flex flex-col transition-colors duration-300">
     
-    <header class="w-full max-w-3xl mx-auto p-6 flex justify-between sm:justify-end items-center text-sm font-medium text-gray-600 dark:text-gray-400">
+    <header class={`w-full ${containerMaxWidth} mx-auto p-6 flex justify-between sm:justify-end items-center text-sm font-medium text-gray-600 dark:text-gray-400`}>
       <nav class="flex gap-4 sm:gap-6">
         <a href="/" class="hover:text-black dark:hover:text-white transition-colors">About</a>
         <a href="/blog" class="hover:text-black dark:hover:text-white transition-colors">Blog</a>
@@ -53,11 +54,11 @@ const { title = "Portfolio" } = Astro.props;
       </button>
     </header>
 
-    <main class="flex-1 w-full max-w-3xl mx-auto px-6 py-8">
+    <main class={`flex-1 w-full ${containerMaxWidth} mx-auto px-6 py-8`}>
       <slot />
     </main>
 
-    <footer class="text-center text-gray-500 text-xs py-8 border-t border-gray-200 dark:border-gray-800 w-full max-w-3xl mx-auto">
+    <footer class={`text-center text-gray-500 text-xs py-8 border-t border-gray-200 dark:border-gray-800 w-full ${containerMaxWidth} mx-auto`}>
       © 2026 {title}. Built with Astro & Keystatic.
     </footer>
 
