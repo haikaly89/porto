@@ -3,7 +3,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
   // TAHAP 3: Konfigurasi Storage dengan mode GitHub untuk Vercel
-  storage: process.env.NODE_ENV === 'development'
+  storage: (import.meta.env.DEV || process.env.NODE_ENV === 'development')
     ? { kind: 'local' }
     : {
       kind: 'github',
