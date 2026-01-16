@@ -11,6 +11,7 @@ tags:
 - Elastic
 - Kibana
 cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/Group%2063.png"
+repository: "https://github.com/haikaly89"
 ---
 
 <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 mb-12 bg-white dark:bg-[#1c1e26] shadow-sm">

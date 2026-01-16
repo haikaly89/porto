@@ -55,6 +55,15 @@ const heroImage = project.data.cover || (imageMatch ? imageMatch[1] : null);
             </div>
             <!-- Add more metadata here if needed -->
         </div>
+
+        {project.data.repository && (
+          <div class="mt-8">
+            <a href={project.data.repository} target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-gray-900 hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 transition-colors duration-300">
+              <i class="fab fa-github mr-3 text-lg"></i>
+              View on GitHub
+            </a>
+          </div>
+        )}
       </div>
 
       {heroImage && (

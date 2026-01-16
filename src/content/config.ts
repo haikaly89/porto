@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 
 // 1. Definisi Profile (Tipe: Data)
 const profile = defineCollection({
-  type: 'data', 
+  type: 'data',
   schema: z.object({
     name: z.string(),
     role: z.string(),
@@ -31,7 +31,7 @@ const cv = defineCollection({
     role: z.string(),
     contact: z.string(), // Menggabungkan email/phone/social
     summary: z.string(),
-    
+
     experience: z.array(z.object({
       position: z.string(),
       company: z.string(),
@@ -78,13 +78,14 @@ const posts = defineCollection({
 
 // 5. Definisi Projects (Tipe: Content)
 const projects = defineCollection({
-  type: 'content', 
+  type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.date(),
     summary: z.string(),
-    tags: z.array(z.string()), 
+    tags: z.array(z.string()),
     cover: z.string().optional(),
+    repository: z.string().optional(),
   }),
 });
 
