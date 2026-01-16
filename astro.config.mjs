@@ -6,7 +6,10 @@ import keystatic from '@keystatic/astro';
 
 import markdoc from '@astrojs/markdoc';
 
+import vercel from '@astrojs/vercel';
+
 export default defineConfig({
   integrations: [tailwind(), react(), keystatic(), markdoc()],
   output: 'static',
+  adapter: vercel(),
 });
