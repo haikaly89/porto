@@ -45,7 +45,9 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
 
     <div class="col-span-1">
       <div class="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 leading-relaxed mb-6 mx-auto sm:mx-0">
-         <p class="whitespace-pre-line">{bio}</p>
+         {bio.split('\n').map((line) => line.trim() && (
+            <p class="text-justify mb-2">{line}</p>
+         ))}
       </div>
 
       <div class="flex gap-5 text-3xl mt-4 items-center justify-center sm:justify-start">
