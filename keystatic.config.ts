@@ -7,7 +7,7 @@ export default config({
     ? { kind: 'local' }
     : {
       kind: 'github',
-      repo: 'haikaly89/porto'
+      repo: 'haikaly89/porto',
     },
 
   // 1. DATA SINGLETONS (Profile & CV)
