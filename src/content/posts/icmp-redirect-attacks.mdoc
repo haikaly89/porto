@@ -1,0 +1,83 @@
+---
+title: 'ICMP Redirect Attacks '
+date: 2026-01-17
+---
+Redirect messages are used by routers to inform hosts that a more optimal path exists for a specific \
+destination. However, for a host to accept these "suggestions," certain conditions must be met.
+
+\
+In this lab, I had to manually enable the acceptance of redirect packets on the victim's machine by modifying \
+the kernel parameters:
+
+> \# Enabling redirect acceptance for the experiment \
+sysctl net.ipv4.conf.all.accept_redirects=1
+
+The topology consisted of:
+
+![](/images/posts/icmp-redirect-attacks/topologyicmp.png)
+
+\
+• Victim (10.9.0.5): The target machine accepting the redirects. \
+• Legitimate Router (10.9.0.11): The original gateway. \
+• Malicious Router/Attacker (10.9.0.111): The node attempting to intercept traffic. \
+• External Server (192.168.60.5): The destination for the victim's data.
+
+---
+
+\
+**Task 1: Launching the ICMP Redirect Attack**
+
+The objective of Task 1 was to manipulate the victim's routing table silently.
+
+Initial State: Using mtr -n 192.168.60.5, we confirmed that traffic initially flowed directly through \
+the legitimate gateway.
+
+![](/images/posts/icmp-redirect-attacks/mtr11.png)
+
+\
+Packet Crafting with Scapy: This code using the Scapy library in Python to craft a malicious \
+ICMP packet. According to the SEED Lab requirements, the packet must include:
+
+- Outer IP Header: Source spoofed as the legitimate gateway (10.9.0.11).
+- ICMP Header: Set to Type 5, Code 1 (Redirect for Host) with the new gateway set to the \
+  attacker's IP (10.9.0.111).
+- Inner Payload: The IP header + 8 bytes of the original packet that triggered the redirect.EndFragment
+
+![craftingscappyyy](/images/posts/icmp-redirect-attacks/image.png)
+
+After execution, the victim's state in ip route show cache displayed a  \
+entry. This confirmed the victim was now routing all traffic for the target server through the attacker.
+
+![](/images/posts/icmp-redirect-attacks/hazellnya.png)
+
+---
+
+\
+**Task2: Man-in-the-Middle (MITM) and Data Tampering End**
+
+In this task , I moved beyond mere redirection to active interception and modification of data.
+
+Intercepting Traffic: established the connection using Netcat (nc).
+
+![](/images/posts/icmp-redirect-attacks/NCNetcatt.png)
+
+On the malicious router, disabled kernel-level IP forwarding (sysctlnet.ipv4.ip_forward=0). This forced the traffic to stay within our custom script's control.
+
+![offforwardr](/images/posts/icmp-redirect-attacks/image.png)
+
+mitm_attack.py is script to sniff incoming TCP packets. The script logic included:
+
+![codedeede](/images/posts/icmp-redirect-attacks/414804c3-75bc-4be2-9894-d5bbd5f4a901.png)
+
+- Sniffing: Capturing packets on the eth0 interface.
+- Modification: Replacing specific strings (e.g., changing "haikal" to "AAAAAA").
+- Integrity Maintenance: Manually deleting the IP and TCP checksums before re-sending, allowing Scapy to recalculate them so the packet wouldn't be rejected as corrupted.
+
+![](/images/posts/icmp-redirect-attacks/finallls.png)
+
+\
+The target server received the data, but the content was altered. This successfully demonstrated a violation of Data Integrity.
+
+---
+
+As outlined in the SEED Security Labs documentation, the ICMP Redirect attack is a classic example of why implicit trust in network protocols is dangerous. While these redirects were intended to make the internet faster, they now serve as a reminder that security must be "baked in" rather than "bolted on." To defend against this, modern systems should keep accept_redirects disabled unless absolutely necessary.

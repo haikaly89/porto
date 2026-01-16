@@ -18,21 +18,21 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-  <article class="prose prose-invert prose-lg mx-auto mt-10 mb-20">
+  <article class="prose dark:prose-invert prose-lg mx-auto mt-10 mb-20 prose-img:max-h-[300px] prose-img:w-auto prose-img:mx-auto prose-img:rounded-xl prose-img:shadow-lg">
     
-    <header class="mb-10 text-center border-b border-gray-800 pb-8">
-      <h1 class="text-4xl font-bold text-white mb-4">{post.data.title}</h1>
-      <p class="text-gray-500 text-sm">
+    <header class="mb-10 text-center border-b border-gray-200 dark:border-gray-800 pb-8">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.data.title}</h1>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">
         Published on {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
       </p>
     </header>
 
-    <div class="text-gray-300 leading-relaxed">
+    <div class="text-gray-700 dark:text-gray-300 leading-relaxed">
       <Content />
     </div>
 
-    <div class="mt-16 pt-8 border-t border-gray-800 text-center">
-      <a href="/" class="text-blue-400 hover:text-blue-300 hover:underline">
+    <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
+      <a href="/" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline">
         ← Back to Home
       </a>
     </div>
