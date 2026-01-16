@@ -1,22 +1,20 @@
 ---
-title: "Implementing Virtualized Microservices and AI Workloads on OpenStack Private Cloud"
+title: "Private CI/CD Server using Gitea, Webhook, and GoAccess Monitoring"
 date: 2025-12-20
-summary: "This project demonstrates the design and deployment of a private cloud infrastructure using OpenStack to host
-virtualized microservices and high-performance AI workloads, offering a cost-effective open-source alternative to
-expensive enterprise licenses."
+summary: "A lightweight, self-hosted CI/CD infrastructure on Ubuntu VPS utilizing Gitea and Webhooks for automated deployment with real-time GoAccess traffic monitoring."
 tags:
-- Openstack
-- Mongosh
-- Jupyter 
-- Elastic
-- Kibana
-cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/Group%2063.png"
+- Gitea
+- CI/CD
+- Nginx
+- Webhook
+- GoAccess
+cover: "/images/projects/private-ci-cd-gitea-webhook-goaccess/gitea.png"
 ---
 
 <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 mb-12 bg-white dark:bg-[#1c1e26] shadow-sm">
   <h3 class="text-xl font-bold mb-4 mt-0 text-gray-900 dark:text-white">Project Overview</h3>
   <p class="mb-0 text-gray-600 dark:text-gray-300 text-justify">
-    In the modern era of technology, high-performance computing has become a necessity. However, enterprise licensing costs often become a barrier. This project explores OpenStack as a cost-effective solution for heavy workloads such as AI. It proves that building high-performance infrastructure does not have to be expensive
+    Modern software development requires automated, structured, and controllable deployment systems. Popular CI/CD solutions often demand significant server resources, posing a challenge for small-scale developers or educational environments with limited budgets. This project solves these issues by building a lightweight, private CI/CD architecture on an Ubuntu VPS. It integrates Gitea for version control and Webhooks for automation, providing independence from third-party services while maintaining data sovereignty and operational efficiency on low-specification hardware.
   </p>
 </div>
 
@@ -27,9 +25,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       1</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Horizon (Dashboard)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">The web-based dashboard used to manage and monitor
-        the entire cloud infrastructure.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Ubuntu Server</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Acts as the stable, open-source operating system foundation for all integrated server services.</p>
     </div>
   </div>
 
@@ -37,9 +34,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       2</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Keystone (Identity)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">The identity service that handles authentication and
-        authorization for all users and services.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Bind9</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Serves as the DNS server to translate domain names like "proyek.lokal" into the server's static IP address.</p>
     </div>
   </div>
 
@@ -47,9 +43,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       3</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Nova (Compute)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">The compute engine responsible for managing and
-        provisioning virtual machines (instances).</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Nginx</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Functions as a high-performance web server and reverse proxy to securely manage and serve web traffic.</p>
     </div>
   </div>
 
@@ -57,9 +52,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       4</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Neutron (Networking)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">The networking component that manages virtual
-        networks, IP addresses, and connectivity.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Gitea</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">A lightweight, Go-based Version Control System used for managing private Git repositories with minimal resource consumption.</p>
     </div>
   </div>
 
@@ -67,9 +61,17 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       5</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Glance (Image)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">The image service used to store and manage the
-        virtual disk images needed to boot instances.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Webhook</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">An automation mechanism that triggers deployment scripts on the server immediately after code changes are detected.</p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm hover:shadow-md transition-shadow">
+    <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
+      6</div>
+    <div>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">GoAccess</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">A real-time monitoring tool that analyzes Nginx access logs to visualize server traffic and visitor statistics.</p>
     </div>
   </div>
 </div>
@@ -82,9 +84,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Database VM (MongoDB)</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Stores and manages large datasets required for AI
-          analysis efficiently.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Resource Efficiency</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Designed to run smoothly on servers with limited CPU and memory using lightweight components.</p>
       </div>
     </div>
   </div>
@@ -94,9 +95,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">AI Engine VM</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Equipped with Anaconda, Jupyter, and Python for
-          model training and analysis.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Automated Deployment</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Eliminates manual file transfers by using Webhooks to trigger real-time updates upon repository pushes.</p>
       </div>
     </div>
   </div>
@@ -106,9 +106,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Monitoring VM</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Dedicated to system health tracking to ensure
-          stable infrastructure.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Real-Time Monitoring</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Provides instant visualization of web traffic and server performance without needing a complex database.</p>
       </div>
     </div>
   </div>
@@ -118,9 +117,19 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Full Scalability</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Placement service optimizes resource allocation
-          across CPU, RAM, and Disk.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Data Sovereignty</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">A fully self-hosted private environment that ensures complete control over internal data and development processes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm">
+    <div class="flex items-start">
+      <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
+        <i class="fas fa-check text-xs"></i></div>
+      <div>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Secure Reverse Proxy</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Nginx hides internal services and enables HTTPS to protect data communication from external exposure.</p>
       </div>
     </div>
   </div>
@@ -133,9 +142,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       1</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Initial Prototyping</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Tested with DevStack and MicroStack on local
-        workstations.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Infrastructure Setup</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Installation and configuration of Bind9 DNS and Nginx web server to establish basic network accessibility.</p>
     </div>
   </div>
 
@@ -143,9 +151,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       2</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Manual Installation</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Performed scratch installation to gain full
-        configuration control.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Git Implementation</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Deploying Gitea as a self-hosted repository manager for secure source code version control.</p>
     </div>
   </div>
 
@@ -153,9 +160,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       3</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Service Deployment</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Configured Keystone, Nova, Neutron, and Glance
-        services.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">CI/CD Automation</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Configuring Webhooks and deployment scripts to synchronize code changes from Gitea to the Nginx web directory.</p>
     </div>
   </div>
 
@@ -163,9 +169,8 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       4</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Workload Validation</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Successfully ran AI scripts and visualized results in
-        the private cloud.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Monitoring Integration</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Setting up GoAccess to parse Nginx logs and generate a real-time visual monitoring dashboard.</p>
     </div>
   </div>
 </div>
@@ -176,9 +181,7 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <div class="mt-4 flex items-start">
       <i class="fas fa-check-circle mt-1 mr-4 text-white/80"></i>
       <p class="m-0 font-medium leading-relaxed text-white/90 text-justify">
-        By using OpenStack, we were able to create a flexible, "from-scratch" private cloud that rivals commercial
-        solutions. This experience deepened our understanding of cloud orchestration and open-source technology
-        potential for AI.
+        The project successfully established a functional, lightweight CI/CD pipeline where code commits to Gitea automatically trigger website updates via Webhooks. The system proved stable on resource-limited hardware, with GoAccess providing valuable real-time traffic insights without overtaxing the CPU. This architecture offers a practical, independent DevOps alternative for educational and small-scale development environments.
       </p>
     </div>
   </div>
@@ -190,13 +193,13 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
   <div class="h-full flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group">
-    <img src="/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/Group%2063.png" class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" alt="OpenStack Infrastructure Diagram" />
+    <img src="/images/projects/private-ci-cd-gitea-webhook-goaccess/workflow.png" class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" alt="Workflow" />
   </div>
   <div class="h-full flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group">
     <img 
-      src="/images/projects/implementing-virtualized-microservices-and-ai-workloads-on-open-stack-private-cloud/image.png" 
+      src="/images/projects/private-ci-cd-gitea-webhook-goaccess/goaccess.png" 
       class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" 
-      alt="OpenStack Dashboard" 
+      alt="GoAccess" 
     />
   </div>
 </div>
