@@ -2,9 +2,13 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
-  storage: {
-    kind: 'local',
-  },
+  // TAHAP 3: Konfigurasi Storage dengan mode GitHub untuk Vercel
+  storage: process.env.NODE_ENV === 'development'
+    ? { kind: 'local' }
+    : {
+      kind: 'github',
+      repo: 'haikaly89/porto'
+    },
 
   // 1. DATA SINGLETONS (Profile & CV)
   singletons: {
@@ -16,7 +20,7 @@ export default config({
         role: fields.text({ label: 'Jabatan / Role' }),
         bio: fields.text({
           label: 'Bio / Deskripsi',
-          multiline: true, 
+          multiline: true,
         }),
         avatar: fields.image({
           label: 'Foto Profil',
@@ -31,30 +35,27 @@ export default config({
       label: 'CV Data',
       path: 'src/content/cv/data',
       schema: {
-        // A. Info Dasar
         name: fields.text({ label: 'Nama Lengkap' }),
         role: fields.text({ label: 'Role / Headline' }),
         contact: fields.text({ label: 'Info Kontak (Email | HP | LinkedIn)' }),
         summary: fields.text({ label: 'Summary / Ringkasan Diri', multiline: true }),
-        
-        // B. Pengalaman Kerja
+
         experience: fields.array(
           fields.object({
             position: fields.text({ label: 'Posisi' }),
             company: fields.text({ label: 'Perusahaan/Instansi' }),
             date: fields.text({ label: 'Periode (ex: 2024 - Present)' }),
             location: fields.text({ label: 'Lokasi' }),
-            highlights: fields.array(fields.text({ label: 'Poin Jobdesc' }), { 
-              label: 'Job Desc / Achievements' 
+            highlights: fields.array(fields.text({ label: 'Poin Jobdesc' }), {
+              label: 'Job Desc / Achievements'
             }),
           }),
-          { 
-            label: 'Work Experience', 
-            itemLabel: props => `${props.fields.position.value} @ ${props.fields.company.value}` 
+          {
+            label: 'Work Experience',
+            itemLabel: props => `${props.fields.position.value} @ ${props.fields.company.value}`
           }
         ),
 
-        // C. Volunteer
         volunteer: fields.array(
           fields.object({
             role: fields.text({ label: 'Peran' }),
@@ -66,7 +67,6 @@ export default config({
           { label: 'Volunteer Experience', itemLabel: props => props.fields.event.value }
         ),
 
-        // D. Organisasi (Leadership)
         organization: fields.array(
           fields.object({
             role: fields.text({ label: 'Jabatan' }),
@@ -77,7 +77,6 @@ export default config({
           { label: 'Organizations', itemLabel: props => props.fields.name.value }
         ),
 
-        // E. Edukasi
         education: fields.array(
           fields.object({
             school: fields.text({ label: 'Kampus / Sekolah' }),
@@ -88,10 +87,9 @@ export default config({
           { label: 'Education', itemLabel: props => props.fields.school.value }
         ),
 
-        // F. Skills & Certifications
         skills: fields.text({ label: 'Skills (List Manual)', multiline: true }),
         certifications: fields.array(
-          fields.text({ label: 'Nama Sertifikat' }), 
+          fields.text({ label: 'Nama Sertifikat' }),
           { label: 'Certifications' }
         ),
       },
@@ -100,7 +98,6 @@ export default config({
 
   // 2. DATA COLLECTIONS (Posts, Badges, Projects)
   collections: {
-    // A. Blog Posts
     posts: collection({
       label: 'Blog Posts',
       slugField: 'title',
@@ -122,7 +119,6 @@ export default config({
       },
     }),
 
-    // B. Badges / Sertifikat
     badges: collection({
       label: 'Certificates & Badges',
       slugField: 'name',
@@ -138,7 +134,6 @@ export default config({
       },
     }),
 
-    // C. Projects
     projects: collection({
       label: 'Projects',
       slugField: 'title',
@@ -147,10 +142,10 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Nama Proyek' } }),
         date: fields.date({ label: 'Tanggal Pengerjaan' }),
-        summary: fields.text({ 
-          label: 'Deskripsi Singkat', 
+        summary: fields.text({
+          label: 'Deskripsi Singkat',
           description: 'Akan muncul di kartu halaman depan (Card)',
-          multiline: true 
+          multiline: true
         }),
         tags: fields.array(
           fields.text({ label: 'Teknologi' }),
