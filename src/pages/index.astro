@@ -15,7 +15,7 @@ const {
 
 // 2. Ambil Data Projects
 const allProjects = await getCollection('projects');
-const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
 
 // 3. Ambil Data Blog
 const allPosts = await getCollection('posts');

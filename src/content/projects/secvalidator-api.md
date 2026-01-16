@@ -1,20 +1,20 @@
 ---
-title: "Smart Farming IoT and AI-Driven Crop Recommendation System"
-date: 2024-09-20
-summary: "An integrated system using ESP32 sensors and AI to analyze soil conditions and market prices, providing real-time crop recommendations for small-to-medium scale farmers."
+title: "SecValidator API: Automated HTTP Security Header Compliance Analyzer"
+date: 2025-02-20
+summary: "A RESTful API built with FastAPI that scans URLs to validate critical HTTP security headers, providing compliance reports and remediation guidance."
 tags:
-- IoT
-- Artificial Intelligence
-- ESP32
+- FastAPI
 - Python
-- MongoDB
-cover: "/images/projects/smart-farming-iot-ai/prototype.png"
+- Security Analysis
+- HTTP Headers
+- REST API
+cover: "/images/projects/secvalidator-api/log.png"
 ---
 
 <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 mb-12 bg-white dark:bg-[#1c1e26] shadow-sm">
   <h3 class="text-xl font-bold mb-4 mt-0 text-gray-900 dark:text-white">Project Overview</h3>
   <p class="mb-0 text-gray-600 dark:text-gray-300 text-justify">
-    Farmers in Indonesia frequently face harvest failures and volatile market prices, leading to significant financial losses and reduced welfare. This project offers a technological solution by integrating IoT sensors with AI models to analyze soil content and predict optimal crop suitability. By combining real-time environmental data with market price information, the system empowers small-to-medium scale farmers to make informed, data-driven planting decisions. The ultimate goal is to optimize agricultural yields and improve the economic sustainability of farming practices.
+    Web applications are often vulnerable to attacks like Clickjacking and XSS due to missing or misconfigured HTTP security headers. SecValidator API is a specialized security tool designed to address this by automating the analysis and validation of headers on any web application. The API performs comprehensive scans of target URLs to evaluate the presence of critical headers—such as CSP, X-Frame-Options, and HSTS—against OWASP guidelines. It provides developers with detailed compliance reports and actionable remediation recommendations to strengthen their application's defensive posture.
   </p>
 </div>
 
@@ -25,8 +25,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       1</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">ESP32 Microcontroller</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Acts as the central hub for developing sensors and managing data transmission from the agricultural field.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">FastAPI Backend</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">High-performance Python framework that manages RESTful API requests, providing automatic endpoint validation and documentation.</p>
     </div>
   </div>
 
@@ -34,8 +34,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       2</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Multi-Sensor Array</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Includes DHT22, pH, and soil moisture sensors to collect comprehensive environmental and soil data.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Header Parser Module</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">A custom component responsible for securely fetching and extracting HTTP response headers from provided target URLs.</p>
     </div>
   </div>
 
@@ -43,8 +43,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       3</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">MongoDB Atlas</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Provides a scalable cloud-based NoSQL database for centralized storage of all captured sensor information.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Security Rules Engine</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">A configurable engine that evaluates extracted headers against current industry best practices and security compliance standards.</p>
     </div>
   </div>
 
@@ -52,17 +52,17 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       4</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">AI Model (Python)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Analyzes soil content data and market price trends to predict the most suitable crops.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Report Generator</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Compiles evaluation data into structured JSON reports containing security findings, compliance scores, and remediation steps.</p>
     </div>
   </div>
 
-  <div class="flex items-center gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm hover:shadow-md transition-shadow">
+   <div class="flex items-center gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm hover:shadow-md transition-shadow">
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       5</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Streamlit Web App</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Serves as the interactive user interface to display sensor data and crop recommendations to farmers.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Docker Containerization</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Ensures consistent deployment across various environments through a fully containerized, scalable operational setup.</p>
     </div>
   </div>
 </div>
@@ -75,8 +75,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Real-Time Soil Analysis</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Continuous monitoring of moisture, pH, and temperature through an integrated IoT sensor network.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Comprehensive Header Analysis</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Validates critical headers including Content-Security-Policy (CSP), X-Frame-Options, HSTS, and Referrer-Policy.</p>
       </div>
     </div>
   </div>
@@ -86,8 +86,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">AI-Powered Predictions</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Utilizes machine learning to compare real-time sensor data with ideal crop growth parameters.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Security Score Calculation</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Computes an overall security grade based on header presence, configuration quality, and standard compliance.</p>
       </div>
     </div>
   </div>
@@ -97,8 +97,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Market Price Integration</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Real-time food price data is incorporated to ensure recommendations are economically viable for farmers.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Remediation Guidance</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Offers specific, actionable advice and configuration examples for every missing or misconfigured security header detected.</p>
       </div>
     </div>
   </div>
@@ -108,8 +108,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Unified Dashboard</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">A centralized website displays detailed sensor metrics (NPK, Humidity, Temp) alongside specific crop results.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Batch URL Scanning</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Allows users to submit multiple URLs in a single API request for efficient bulk security audits.</p>
       </div>
     </div>
   </div>
@@ -119,8 +119,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Multi-Device Compatibility</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Designed as an improvement over manual methods, allowing integration with various hardware devices.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Auto-Generated Documentation</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Features built-in OpenAPI/Swagger specifications, enabling easy integration for developers and third-party security tools.</p>
       </div>
     </div>
   </div>
@@ -133,8 +133,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       1</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Data Acquisition</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">IoT sensors deployed in the field collect real-time soil and atmospheric data via ESP32.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Request Submission</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The client sends one or more target URLs to the dedicated SecValidator API endpoint.</p>
     </div>
   </div>
 
@@ -142,8 +142,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       2</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Data Classification</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The collected raw sensor metrics are processed and categorized for analysis.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Header Extraction</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The API initiates a secure request to the target URL to fetch its HTTP response headers.</p>
     </div>
   </div>
 
@@ -151,8 +151,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       3</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">AI Comparison</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The system compares categorized sensor data against AI models and integrated market price datasets.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Compliance Evaluation</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The Rules Engine analyzes each header to check for secure configurations and identifies any missing elements.</p>
     </div>
   </div>
 
@@ -160,8 +160,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       4</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Recommendation Generation</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Based on the analysis, the system identifies and recommends the best crop for the current conditions.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Report Generation</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Findings are compiled into a comprehensive JSON response including security scores and suggested configuration fixes.</p>
     </div>
   </div>
 
@@ -169,8 +169,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       5</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Web Visualization</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Final results and crop suggestions (e.g., "coffee") are displayed on the farmer's web dashboard.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Result Delivery</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The API returns the final structured security assessment report directly to the requesting client.</p>
     </div>
   </div>
 </div>
@@ -181,7 +181,7 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="mt-4 flex items-start">
       <i class="fas fa-check-circle mt-1 mr-4 text-white/80"></i>
       <p class="m-0 font-medium leading-relaxed text-white/90 text-justify">
-        The project successfully delivered an end-to-end smart farming solution that replaces manual analysis with automated AI insights. Real-world testing demonstrated the system's ability to ingest data to accurately suggest crops like coffee. This tool provides farmers with a measurable unique value proposition through improved decision-making accuracy and integrated market awareness.
+        SecValidator API successfully automates the complex task of auditing web security headers, transforming manual checks into a scalable automated process. It provides developers with immediate, clear insights into their site's security posture and provides the exact steps needed to remediate vulnerabilities. This results in faster security compliance cycles and more resilient web applications.
       </p>
     </div>
   </div>
@@ -193,13 +193,13 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
   <div class="h-full flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group">
-    <img src="/images/projects/smart-farming-iot-ai/prototype.png" class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" alt="Prototype" />
+    <img src="/images/projects/secvalidator-api/config.png" class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" alt="Configuration" />
   </div>
   <div class="h-full flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group">
     <img 
-      src="/images/projects/smart-farming-iot-ai/dashboard.png" 
+      src="/images/projects/secvalidator-api/log.png" 
       class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" 
-      alt="Dashboard" 
+      alt="Log Output" 
     />
   </div>
 </div>

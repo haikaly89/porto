@@ -31,9 +31,9 @@ const cvData = cvEntry ? cvEntry.data : {
         <p class="text-sm text-gray-500 dark:text-gray-400 font-mono">{cvData.contact}</p>
       </div>
 
-      <button onclick="window.print()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition shadow-lg group cursor-pointer">
+      <a href="/cv-haikal.pdf" download class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition shadow-lg group cursor-pointer no-underline">
         <i class="fa-solid fa-file-pdf group-hover:animate-bounce"></i> Download CV (PDF)
-      </button>
+      </a>
     </div>
 
     <div class="hidden print:block text-center border-b-2 border-black pb-4 mb-6">
@@ -128,7 +128,7 @@ const cvData = cvEntry ? cvEntry.data : {
             <p class="text-md font-medium text-gray-700 dark:text-gray-300 mb-2 print:text-black print:text-sm">{edu.degree}</p>
             <span class="hidden print:block text-xs text-black italic">{edu.date}</span>
             {edu.details && (
-              <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed italic border-l-2 border-gray-300 dark:border-gray-600 pl-3 print:text-black print:border-none print:pl-0 print:not-italic print:text-xs">
+              <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed italic border-l-2 border-gray-300 dark:border-gray-600 pl-3 print:text-black print:border-none print:pl-0 print:not-italic print:text-xs text-justify">
                 {edu.details}
               </p>
             )}

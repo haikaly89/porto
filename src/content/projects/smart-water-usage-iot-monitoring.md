@@ -1,20 +1,19 @@
 ---
-title: "Smart Farming IoT and AI-Driven Crop Recommendation System"
-date: 2024-09-20
-summary: "An integrated system using ESP32 sensors and AI to analyze soil conditions and market prices, providing real-time crop recommendations for small-to-medium scale farmers."
+title: "Smart Water Usage: IoT Monitoring for PDAM Water Bills"
+date: 2024-12-20
+summary: "An IoT-based water usage monitoring system that uses ESP32, RTC, and SD Card to monitor water consumption in real time, detect leaks, and manage PDAM bill cost estimates independently."
 tags:
 - IoT
-- Artificial Intelligence
 - ESP32
-- Python
-- MongoDB
-cover: "/images/projects/smart-farming-iot-ai/prototype.png"
+- Water Monitoring  
+- Sustainability
+cover: "/images/projects/smart-water-usage-iot-monitoring/prototype.png"
 ---
 
 <div class="border border-gray-200 dark:border-gray-700 rounded-2xl p-8 mb-12 bg-white dark:bg-[#1c1e26] shadow-sm">
   <h3 class="text-xl font-bold mb-4 mt-0 text-gray-900 dark:text-white">Project Overview</h3>
   <p class="mb-0 text-gray-600 dark:text-gray-300 text-justify">
-    Farmers in Indonesia frequently face harvest failures and volatile market prices, leading to significant financial losses and reduced welfare. This project offers a technological solution by integrating IoT sensors with AI models to analyze soil content and predict optimal crop suitability. By combining real-time environmental data with market price information, the system empowers small-to-medium scale farmers to make informed, data-driven planting decisions. The ultimate goal is to optimize agricultural yields and improve the economic sustainability of farming practices.
+    The limited availability of clean water and the lack of customer awareness of daily consumption patterns often lead to unexpected spikes in monthly bills. This project develops an efficient and independent water usage monitoring system to provide real-time consumption information and transparent cost estimates to customers. Its main focus is to create a reliable solution without full dependence on stable internet, in order to promote wiser and more sustainable water management in urban areas.
   </p>
 </div>
 
@@ -26,7 +25,7 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       1</div>
     <div>
       <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">ESP32 Microcontroller</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Acts as the central hub for developing sensors and managing data transmission from the agricultural field.</p>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Functions as the main processing unit that processes data from sensors with high speed and stability.</p>
     </div>
   </div>
 
@@ -34,8 +33,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       2</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Multi-Sensor Array</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Includes DHT22, pH, and soil moisture sensors to collect comprehensive environmental and soil data.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">YF B6 Sensor</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Detects water flow and sends electrical pulse signals representing the volume of water passing through.</p>
     </div>
   </div>
 
@@ -43,8 +42,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       3</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">MongoDB Atlas</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Provides a scalable cloud-based NoSQL database for centralized storage of all captured sensor information.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">DS3231 RTC Module</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Records water usage time precisely for chronological data logging without requiring an internet connection.</p>
     </div>
   </div>
 
@@ -52,17 +51,17 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       4</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">AI Model (Python)</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Analyzes soil content data and market price trends to predict the most suitable crops.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">SD Card Module</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Stores all consumption data history and usage time in a structured manner for the long term.</p>
     </div>
   </div>
 
-  <div class="flex items-center gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm hover:shadow-md transition-shadow">
+   <div class="flex items-center gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm hover:shadow-md transition-shadow">
     <div class="relative flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-bold text-sm mt-0">
       5</div>
     <div>
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">Streamlit Web App</h4>
-      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Serves as the interactive user interface to display sensor data and crop recommendations to farmers.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-lg">4x20 LCD Screen</h4>
+      <p class="text-gray-600 dark:text-gray-400 m-0 text-sm mt-1">Presents visualization of water volume data, price estimates, and usage time directly to the user.</p>
     </div>
   </div>
 </div>
@@ -75,8 +74,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Real-Time Soil Analysis</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Continuous monitoring of moisture, pH, and temperature through an integrated IoT sensor network.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Real Time Monitoring</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Tracks water volume and usage cost estimates simultaneously through IoT integration.</p>
       </div>
     </div>
   </div>
@@ -86,8 +85,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">AI-Powered Predictions</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Utilizes machine learning to compare real-time sensor data with ideal crop growth parameters.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Offline Data Logging</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Time recording and data storage continue to operate stably even without an internet connection.</p>
       </div>
     </div>
   </div>
@@ -97,8 +96,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Market Price Integration</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Real-time food price data is incorporated to ensure recommendations are economically viable for farmers.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Leakage Detection</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Able to help users detect water leaks through continuous flow monitoring.</p>
       </div>
     </div>
   </div>
@@ -108,19 +107,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
         <i class="fas fa-check text-xs"></i></div>
       <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Unified Dashboard</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">A centralized website displays detailed sensor metrics (NPK, Humidity, Temp) alongside specific crop results.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-6 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#1c1e26] shadow-sm">
-    <div class="flex items-start">
-      <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-5 mt-0.5">
-        <i class="fas fa-check text-xs"></i></div>
-      <div>
-        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Multi-Device Compatibility</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Designed as an improvement over manual methods, allowing integration with various hardware devices.</p>
+        <h4 class="font-bold text-gray-900 dark:text-white text-md m-0">Cost Management</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 m-0">Provides cost estimates based on PDAM rates to encourage budget usage efficiency.</p>
       </div>
     </div>
   </div>
@@ -134,7 +122,7 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
       1</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
       <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Data Acquisition</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">IoT sensors deployed in the field collect real-time soil and atmospheric data via ESP32.</p>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">YF B6 sensor detects water flow and sends pulse data to ESP32 microcontroller.</p>
     </div>
   </div>
 
@@ -142,8 +130,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       2</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Data Classification</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The collected raw sensor metrics are processed and categorized for analysis.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Data Processing</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">ESP32 converts pulses into volume liters and calculates cost estimates based on applicable rates.</p>
     </div>
   </div>
 
@@ -151,8 +139,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       3</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">AI Comparison</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">The system compares categorized sensor data against AI models and integrated market price datasets.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Time Synchronization</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">RTC module embeds an accurate timestamp on every detected water usage activity.</p>
     </div>
   </div>
 
@@ -160,8 +148,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       4</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Recommendation Generation</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Based on the analysis, the system identifies and recommends the best crop for the current conditions.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Data Storage</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Information on volume, cost, and time is stored on an SD Card as an archive of usage history.</p>
     </div>
   </div>
 
@@ -169,8 +157,8 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="absolute -left-[53px] top-1/2 -translate-y-1/2 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-4 border-white dark:border-[#1c1e26] z-10">
       5</div>
     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 ml-10">
-      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Web Visualization</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Final results and crop suggestions (e.g., "coffee") are displayed on the farmer's web dashboard.</p>
+      <h4 class="font-bold text-gray-900 dark:text-white m-0 text-md">Information Display</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 m-0">Processing results are displayed in real-time on an LCD screen for easy understanding by users.</p>
     </div>
   </div>
 </div>
@@ -181,7 +169,7 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
     <div class="mt-4 flex items-start">
       <i class="fas fa-check-circle mt-1 mr-4 text-white/80"></i>
       <p class="m-0 font-medium leading-relaxed text-white/90 text-justify">
-        The project successfully delivered an end-to-end smart farming solution that replaces manual analysis with automated AI insights. Real-world testing demonstrated the system's ability to ingest data to accurately suggest crops like coffee. This tool provides farmers with a measurable unique value proposition through improved decision-making accuracy and integrated market awareness.
+        This project produces a water monitoring system that can accurately and transparently record volume and costs. Testing shows the system is reliable in logging data and providing quick responses through the LCD screen. Its main impact is the increased efficiency of water management at the household level and support for efforts to conserve clean water resources.
       </p>
     </div>
   </div>
@@ -193,13 +181,13 @@ cover: "/images/projects/smart-farming-iot-ai/prototype.png"
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
   <div class="h-full flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group">
-    <img src="/images/projects/smart-farming-iot-ai/prototype.png" class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" alt="Prototype" />
+    <img src="/images/projects/smart-water-usage-iot-monitoring/hardware.png" class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" alt="Hardware Implementation" />
   </div>
   <div class="h-full flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 group">
     <img 
-      src="/images/projects/smart-farming-iot-ai/dashboard.png" 
+      src="/images/projects/smart-water-usage-iot-monitoring/lcd.png" 
       class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-300" 
-      alt="Dashboard" 
+      alt="LCD interface" 
     />
   </div>
 </div>
