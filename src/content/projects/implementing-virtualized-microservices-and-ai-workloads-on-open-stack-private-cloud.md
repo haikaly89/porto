@@ -175,7 +175,7 @@ cover: "/images/projects/implementing-virtualized-microservices-and-ai-workloads
     <h3 class="text-2xl font-bold mb-2 text-white m-0 border-b border-white/20 pb-4">Project Outcome</h3>
     <div class="mt-4 flex items-start">
       <i class="fas fa-check-circle mt-1 mr-4 text-white/80"></i>
-      <p class="m-0 font-medium leading-relaxed text-white/90">
+      <p class="m-0 font-medium leading-relaxed text-white/90 text-justify">
         By using OpenStack, we were able to create a flexible, "from-scratch" private cloud that rivals commercial
         solutions. This experience deepened our understanding of cloud orchestration and open-source technology
         potential for AI.
