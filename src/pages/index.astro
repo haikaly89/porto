@@ -22,7 +22,7 @@ const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data
 
 // 3. Ambil Data Blog
 const allPosts = await getCollection('posts');
-const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
 ---
 
 <BaseLayout title={name}>
@@ -97,18 +97,28 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
   )}
 
   <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-    <div class="flex flex-col justify-center">
-      <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-        Take a look at my <br/>
-        <span class="bg-blue-600 text-white px-2 mt-2 inline-block transform -rotate-1 rounded-lg">experience journey</span>
+    <div class="flex flex-col justify-center bg-white/50 dark:bg-black/20 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/30 p-8 rounded-3xl shadow-lg">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+        The Journey So Far
       </h2>
-      <p class="text-gray-600 dark:text-gray-300 text-lg mb-8 leading-relaxed">
-        From network engineering to cybersecurity, I've built a strong foundation in protecting and optimizing IT infrastructure through hands-on experience and continuous learning.
+      <p class="text-gray-600 dark:text-gray-300 text-sm mb-6 leading-relaxed">
+        I combine expertise in physical and cloud infrastructure, network security, and AI solutions. My goal is to build strong, resilient systems and contribute to real technological innovation.
       </p>
       <div>
-        <a href="https://www.linkedin.com/in/haikal-yusuf/" target="_blank" class="inline-flex items-center gap-2 bg-white text-black border-2 border-transparent hover:border-black font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95">
+        <a href="https://www.linkedin.com/in/haikal-yusuf/" target="_blank" class="inline-flex items-center gap-2 bg-gray-900 text-white dark:bg-white dark:text-black border-2 border-transparent hover:scale-105 font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95">
           <i class="fa-brands fa-linkedin"></i> See full resume
         </a>
+      </div>
+
+      <div class="mt-8 border-t border-gray-200/30 pt-6">
+        <p class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-2">Technical Expertise</p>
+        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+          <span class="font-semibold text-blue-600 dark:text-blue-400">Programming:</span> Python, Bash Scripting, SQL <br/>
+          <span class="font-semibold text-blue-600 dark:text-blue-400">Infra & Virtualization:</span> Docker & Containerization, KVM/QEMU <br/>
+          <span class="font-semibold text-blue-600 dark:text-blue-400">Networking:</span> Routing, Switching, TCP/IP <br/>
+          <span class="font-semibold text-blue-600 dark:text-blue-400">Cyber Security:</span> Network Security, Vulnerability Assessment, Linux Security Hardening, Traffic Analysis & Monitoring <br/>
+          <span class="font-semibold text-blue-600 dark:text-blue-400">Other:</span> IoT, Web Development
+        </p>
       </div>
     </div>
 

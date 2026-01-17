@@ -18,7 +18,7 @@ experience:
     date: Oct 2025 - Nov 2025
     location: Online
     highlights:
-      - Completed 24 hours of training on 5G Development Evolution, Network Architecture, and Key Technologies.
+      - Completed training on 5G Development Evolution, Network Architecture, and Key Technologies.
       - Gained knowledge in 5G Service Capabilities and Industry Application Solutions.
       - Studied Converged New Technologies and Innovative 5G+ Applications.
   - position: AI-volution AI Ambassador
@@ -29,6 +29,14 @@ experience:
       - Developed strategies to share AI knowledge and foster collaboration.
       - Cultivated leadership skills regarding AI for social good.
       - Learned effective use of digital platforms for community engagement.
+  - position: Master of Ceremonies & Technical Division
+    company: OPENINFRA DAYS INDONESIA 2025
+    date: Apr 2025 - Jul 2025
+    location: Yogyakarta
+    highlights:
+      - Assisting in hosting and facilitating the OID 2025 event (more than 400 participants).
+      - Collaborated with event organizers to adjust the script and schedule in real-time.
+      - Coordinated with the logistics team for technical requirements.
   - position: Laboratory Assistant Object Oriented Programming
     company: UNIVERSITAS GADJAH MADA
     date: Feb 2025 - Jun 2025
@@ -71,14 +79,6 @@ experience:
       - Gained practical skills in cloud infrastructure, security, and architectural design on AWS.
 
 volunteer:
-  - role: Master of Ceremonies & Technical Division
-    event: OPENINFRA DAYS INDONESIA 2025
-    date: Apr 2025 - Jul 2025
-    location: Yogyakarta
-    highlights:
-      - Hosted and facilitated the OID 2025 event (400+ attendees).
-      - Collaborated with event organizers to adjust the script and schedule in real-time.
-      - Coordinated with the logistics team for technical requirements.
   - role: AI-volution AI Ambassador
     event: AI-VOLUTION (US EMBASSY & BIJI-BIJI)
     date: Jun 2025 - Sep 2025
