@@ -6,13 +6,29 @@ summary: Haikal Yusuf Azzam is an Internet Engineering student currently enrolle
 experience:
   - position: Laboratory Assistant Basic Programming Python
     company: UNIVERSITAS GADJAH MADA
-    date: Aug 2024 - Dec 2024 | Aug 2025 - Dec 2025
+    date: Aug 2025 - Dec 2025
     location: Yogyakarta
     highlights:
       - Support instructors in running Python programming lab sessions for students.
       - Help with grading assignments, projects Python, providing constructive feedback to improve students' understanding and skills.
       - Develop practice exercises that align with the Python programming curriculum.
       - Observe students' work, offer guidance, and provide feedback.
+  - position: HCIA 5G Trainee
+    company: Digital Talent Scholarship (Komdigi & Huawei)
+    date: Oct 2025 - Nov 2025
+    location: Online
+    highlights:
+      - Completed 24 hours of training on 5G Development Evolution, Network Architecture, and Key Technologies.
+      - Gained knowledge in 5G Service Capabilities and Industry Application Solutions.
+      - Studied Converged New Technologies and Innovative 5G+ Applications.
+  - position: AI-volution AI Ambassador
+    company: AI-volution (US Embassy & Biji-biji)
+    date: Jun 2025 - Sep 2025
+    location: Yogyakarta
+    highlights:
+      - Developed strategies to share AI knowledge and foster collaboration.
+      - Cultivated leadership skills regarding AI for social good.
+      - Learned effective use of digital platforms for community engagement.
   - position: Laboratory Assistant Object Oriented Programming
     company: UNIVERSITAS GADJAH MADA
     date: Feb 2025 - Jun 2025
@@ -29,6 +45,30 @@ experience:
       - Developing an API to assess password security levels in a login system.
       - Developing an API for web header scanning and security assessment.
       - Creating materials and conducting lab experiments for penetration testing.
+  - position: Laboratory Assistant Basic Programming Python
+    company: UNIVERSITAS GADJAH MADA
+    date: Aug 2024 - Dec 2024
+    location: Yogyakarta
+    highlights:
+      - Support instructors in running Python programming lab sessions for students.
+      - Help with grading assignments, projects Python, providing constructive feedback to improve students' understanding and skills.
+      - Develop practice exercises that align with the Python programming curriculum.
+      - Observe students' work, offer guidance, and provide feedback.
+  - position: AI & IoT Bootcamp
+    company: Samsung Innovation Campus Batch 5
+    date: Feb 2024 - Jun 2024
+    location: Yogyakarta
+    highlights:
+      - Completed 4-month intensive training in AI & IoT with hands-on experience in sensor integration, device programming, and data communication.
+      - Delivered a functional IoT solution through capstone project.
+  - position: AWS Cloud Engineer Trainee
+    company: Digital Talent Scholarship (Kominfo)
+    date: Feb 2024 - Mar 2024
+    location: Online
+    highlights:
+      - Completed 133 hours of intensive training in AWS Cloud Engineering.
+      - Mastered AWS Academy Cloud Foundation and AWS Academy Cloud Architecting.
+      - Gained practical skills in cloud infrastructure, security, and architectural design on AWS.
 
 volunteer:
   - role: Master of Ceremonies & Technical Division

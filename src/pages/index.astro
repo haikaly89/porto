@@ -13,6 +13,9 @@ const {
   location 
 } = profile ? profile.data : {};
 
+// 2. Ambil Data CV (untuk Experience)
+const cv = await getEntry('cv', 'data');
+
 // 2. Ambil Data Projects
 const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
@@ -92,6 +95,47 @@ const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.
       </div>
     </section>
   )}
+
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+    <div class="flex flex-col justify-center">
+      <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+        Take a look at my <br/>
+        <span class="bg-blue-600 text-white px-2 mt-2 inline-block transform -rotate-1 rounded-lg">experience journey</span>
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 text-lg mb-8 leading-relaxed">
+        From network engineering to cybersecurity, I've built a strong foundation in protecting and optimizing IT infrastructure through hands-on experience and continuous learning.
+      </p>
+      <div>
+        <a href="https://www.linkedin.com/in/haikal-yusuf/" target="_blank" class="inline-flex items-center gap-2 bg-white text-black border-2 border-transparent hover:border-black font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-95">
+          <i class="fa-brands fa-linkedin"></i> See full resume
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-6 max-h-[600px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-200 dark:[&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-300 dark:hover:[&::-webkit-scrollbar-thumb]:bg-gray-600 transition-colors">
+      {cv && cv.data.experience && cv.data.experience.map((job, index) => (
+        <div class="bg-white dark:bg-[#1a1c23] p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow shrink-0">
+          <div class="flex justify-between items-start mb-4">
+            <span class="font-bold text-gray-800 dark:text-gray-200 text-sm bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
+              {job.date.split('|')[0].trim()}
+            </span>
+            <div class="w-10 h-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center bg-white dark:bg-gray-800 shrink-0">
+               <span class="font-bold text-lg text-blue-600">{job.company.charAt(0)}</span>
+            </div>
+          </div>
+          
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            {job.position}
+          </h3>
+          <p class="text-blue-600 dark:text-blue-400 font-medium text-sm mb-4">{job.company}</p>
+          
+          <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
+            {job.highlights[0]}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
 
   {sortedPosts.length > 0 && (
     <section>
