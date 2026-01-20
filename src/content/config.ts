@@ -67,14 +67,7 @@ const cv = defineCollection({
   }),
 });
 
-// 4. Definisi Posts (Tipe: Content)
-const posts = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-  }),
-});
+
 
 // 5. Definisi Projects (Tipe: Content)
 const projects = defineCollection({
@@ -94,6 +87,6 @@ export const collections = {
   profile,
   badges,
   cv,
-  posts,
+
   projects,
 };
