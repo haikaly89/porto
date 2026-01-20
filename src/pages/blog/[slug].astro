@@ -2,7 +2,7 @@
 // src/pages/blog/[slug].astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export const prerender = false; 
+export const prerender = false; // Gunakan SSR agar konten selalu update 
 
 const { slug } = Astro.params;
 
