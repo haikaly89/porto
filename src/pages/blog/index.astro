@@ -2,6 +2,8 @@
 // src/pages/blog/index.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+export const prerender = false;
+
 const query = `
   query GetUserArticles {
     publication(host: "haikaly-0.hashnode.dev") {
