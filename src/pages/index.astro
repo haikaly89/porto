@@ -3,6 +3,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getEntry, getCollection } from 'astro:content';
 
+export const prerender = false;
+
 // 1. Ambil Data Profil
 const profile = await getEntry('profile', 'data');
 const { 
@@ -20,16 +22,20 @@ const cv = await getEntry('cv', 'data');
 const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
 
-// 4. Ambil Data Blog dari Hashnode (Limit 3)
+// 4. Ambil Data Blog dari Hashnode
 const query = `
-  query GetRecentPosts {
+  query GetUserArticles {
     publication(host: "haikaly-0.hashnode.dev") {
-      posts(first: 3) {
+      posts(first: 10) {
         edges {
           node {
             title
+            brief
             slug
             publishedAt
+            coverImage {
+              url
+            }
           }
         }
       }
@@ -46,11 +52,18 @@ try {
       "Authorization": import.meta.env.HASHNODE_TOKEN,
     },
     body: JSON.stringify({ query }),
+    cache: "no-store", 
   });
   
   const result = await response.json();
+
+  // TAMBAHKAN INI:
+  console.log("DEBUG PUBLICATION DATA:", result.data?.publication?.posts?.edges?.length);
+  console.log("FULL DATA:", JSON.stringify(result.data?.publication?.posts?.edges));
+
   if (result.data?.publication?.posts?.edges) {
-    latestPosts = result.data.publication.posts.edges.map(edge => edge.node);
+    latestPosts = result.data.publication.posts.edges.map(edge => edge.node).slice(0, 3);
+    console.log("HOMEPAGE FETCHED POSTS:", latestPosts.map(p => p.title));
   } else {
     console.log("Homepage: No posts found or API error", result);
   }
