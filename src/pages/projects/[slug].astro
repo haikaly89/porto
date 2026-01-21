@@ -1,65 +1,51 @@
 ---
 // src/pages/projects/[slug].astro
-import { getCollection, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map(project => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+// Pastikan ini sesuai dengan mode yang Anda inginkan (true untuk SSG, false untuk SSR)
+export const prerender = false;
+
+const { slug } = Astro.params;
+const entry = await getEntry('projects', slug);
+
+if (!entry) {
+  return Astro.redirect('/404');
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
+const { Content } = await render(entry);
 
-// Attempt to find the first image URL from the markdown body to use as a Hero Image
-const imageMatch = project.body ? project.body.match(/!\[.*?\]\((.*?)\)/) : null;
-const heroImage = project.data.cover || (imageMatch ? imageMatch[1] : null);
+// Mengambil Hero Image dengan cara yang lebih aman
+const heroImage = entry.data.cover || null;
 ---
 
-<BaseLayout title={project.data.title} wide={true}>
-  <div class="max-w-5xl mx-auto mt-10 mb-20">
-    
-    <a href="/projects" class="group inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 mb-8 transition-colors">
-      <span class="mr-2 transform group-hover:-translate-x-1 transition-transform">←</span> Back to Projects
+<BaseLayout title={entry.data.title} wide={true}>
+  <div class="max-w-5xl mx-auto mt-10 mb-20 px-4">
+    <a href="/projects" class="group inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 mb-8">
+      <span class="mr-2">←</span> Back to Projects
     </a>
 
-    <!-- Hero Section -->
     <header class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-start animate-fade-in">
       <div class="order-2 lg:order-1">
-        
         <div class="flex flex-wrap gap-2 mb-6">
-          {project.data.tags.map(tag => (
-            <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full">
+          {entry.data.tags?.map((tag: string) => (
+            <span class="px-3 py-1 text-xs font-semibold uppercase bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full">
               {tag}
             </span>
           ))}
         </div>
-
-        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight">
-          {project.data.title}
-        </h1>
         
-        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-          {project.data.summary}
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
+          {entry.data.title}
+        </h1>
+
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          {entry.data.summary}
         </p>
 
-        <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 pt-6">
-            <div class="flex items-center">
-                <i class="fas fa-calendar-alt mr-2"></i>
-                <time datetime={project.data.date.toISOString()}>
-                    {project.data.date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}
-                </time>
-            </div>
-            <!-- Add more metadata here if needed -->
-        </div>
-
-        {project.data.repository && (
+        {entry.data.repository && (
           <div class="mt-8">
-            <a href={project.data.repository} target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-gray-900 hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 transition-colors duration-300">
-              <i class="fab fa-github mr-3 text-lg"></i>
+            <a href={entry.data.repository} target="_blank" class="inline-flex items-center px-6 py-3 rounded-xl bg-gray-900 text-white dark:bg-white dark:text-gray-900">
               View on GitHub
             </a>
           </div>
@@ -67,26 +53,19 @@ const heroImage = project.data.cover || (imageMatch ? imageMatch[1] : null);
       </div>
 
       {heroImage && (
-        <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl max-w-sm w-full group cursor-default">
-                <img 
-                    src={heroImage} 
-                    alt={project.data.title} 
-                    class="object-cover w-full h-auto transform transition duration-700 hover:scale-105"
-                />
-                <div class="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-2xl"></div>
+        <div class="order-1 lg:order-2 flex justify-center">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img src={heroImage} alt={entry.data.title} class="object-cover w-full h-auto" />
             </div>
         </div>
       )}
     </header>
 
-    <!-- Content Section -->
     <div class="bg-white dark:bg-[#1c1e26] rounded-3xl md:p-10">
-        <article class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 prose-img:rounded-2xl prose-img:shadow-xl prose-img:mx-auto prose-img:max-w-full md:prose-img:max-w-[50%] prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-500 prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-gray-50 dark:prose-blockquote:bg-gray-800/50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:rounded-r-lg">
-        <Content />
+        <article class="prose prose-lg dark:prose-invert max-w-none">
+          <Content />
         </article>
     </div>
-
   </div>
 </BaseLayout>
 

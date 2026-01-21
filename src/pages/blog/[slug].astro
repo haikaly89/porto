@@ -2,7 +2,7 @@
 // src/pages/blog/[slug].astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export const prerender = false; // Gunakan SSR agar konten selalu update 
+export const prerender = false; 
 
 const { slug } = Astro.params;
 
@@ -12,13 +12,15 @@ const query = `
       post(slug: $slug) {
         title
         content { html }
+        publishedAt
         coverImage { url }
       }
     }
   }
 `;
 
-const response = await fetch("https://gql.hashnode.com", {
+// Tambahkan cache buster untuk menghindari data stale saat dev
+const response = await fetch("https://gql.hashnode.com?v=" + Date.now(), {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -26,63 +28,90 @@ const response = await fetch("https://gql.hashnode.com", {
   },
   body: JSON.stringify({ 
     query,
-    variables: { slug } 
+    variables: { slug: slug }
   }),
 });
 
 const result = await response.json();
 
-// Coba ambil post, jika null ambil staticPage
-const postData = result.data?.publication?.post;
-const pageData = result.data?.publication?.staticPage;
+// DEBUGGING: Log hasil mentah dari Hashnode
+console.log(`[DEBUG] Fetching slug: ${slug}`);
+console.log("[DEBUG] Raw Result:", JSON.stringify(result, null, 2));
 
-const contentItem = postData || pageData;
+const post = result.data?.publication?.post;
 
-if (!contentItem) {
-  return Astro.redirect('/404');
+if (!post) {
+  console.error("SLUG TIDAK TERDAFTAR DI HASHNODE:", slug);
+  // Kita TIDAK redirect ke 404 dulu, agar bisa lihat error di layar
+}
+
+// Manual fix for title
+if (post && post.title.includes('Amazon EC2 Infrastructure')) {
+  post.title = post.title.replace(' Infrastructure', '');
 }
 ---
 
-<BaseLayout title={contentItem.title}>
-  <article class="prose dark:prose-invert prose-lg mx-auto mt-10 mb-20 prose-img:max-h-[500px] prose-img:w-auto prose-img:mx-auto prose-img:rounded-xl prose-img:shadow-lg prose-img:my-12">
-    
-    <header class="mb-10 text-center border-b border-gray-200 dark:border-gray-800 pb-8">
-      {contentItem.coverImage?.url && (
-          <img src={contentItem.coverImage.url} alt={contentItem.title} class="w-full max-h-[400px] object-cover rounded-xl shadow-md my-10" />
-      )}
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{contentItem.title}</h1>
-      {contentItem.publishedAt && (
-        <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Published on {new Date(contentItem.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+<BaseLayout title={post?.title || "Post Not Found"}>
+  
+  {post ? (
+    <article class="mx-auto mt-10 mb-20 px-4 max-w-3xl">
+      <header class="mb-10 text-center border-b border-gray-200 dark:border-gray-800 pb-8">
+        {post.coverImage?.url && (
+            <img src={post.coverImage.url} alt={post.title} class="w-full max-h-[400px] object-cover rounded-xl shadow-md mb-10" />
+        )}
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.title}</h1>
+        {post.publishedAt && (
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+              Published on {new Date(post.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+        )}
+      </header>
+
+      <div class="prose dark:prose-invert prose-lg max-w-none text-gray-700 dark:text-gray-300" set:html={post.content.html} />
+
+      <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
+        <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline font-medium">
+          ← Back to Blog
+        </a>
+      </div>
+    </article>
+  ) : (
+    <div class="min-h-[50vh] flex flex-col items-center justify-center text-center px-4">
+      <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-8 max-w-xl w-full">
+        <h1 class="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">Post Tidak Ditemukan</h1>
+        <p class="text-gray-600 dark:text-gray-300 mb-6">
+          API Hashnode tidak mengembalikan data untuk slug ini.
         </p>
-      )}
-    </header>
-
-    <div class="text-gray-700 dark:text-gray-300 leading-relaxed" set:html={contentItem.content.html} />
-
-    <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
-      <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline">
-        ← Back to Blog
-      </a>
+        <div class="bg-gray-100 dark:bg-black/50 p-4 rounded-lg text-left overflow-x-auto mb-6">
+          <p class="font-mono text-sm text-gray-500">Slug: <span class="text-gray-900 dark:text-white font-bold">{slug}</span></p>
+        </div>
+        <p class="text-sm text-gray-500">Cek terminal VS Code untuk melihat raw log response dari Hashnode.</p>
+        
+        <div class="mt-8">
+            <a href="/blog" class="inline-flex items-center px-6 py-3 rounded-xl bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 transition-colors">
+                Kembali ke Blog
+            </a>
+        </div>
+      </div>
     </div>
+  )}
 
-  </article>
+  <style is:global>
+    /* Menargetkan gambar di dalam div konten */
+    .prose img {
+      margin-top: 3.5rem !important;
+      margin-bottom: 2.5rem !important;
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      max-height: 500px !important;
+      width: auto !important;
+      border-radius: 0.75rem !important;
+    }
+
+    /* Jarak ekstra jika gambar berada tepat setelah paragraf */
+    .prose p + img {
+      margin-top: 4rem !important;
+    }
+  </style>
 </BaseLayout>
-
-<style is:global>
-  /* Menargetkan semua gambar di dalam div konten */
-  .prose img {
-    margin-top: 2rem !important;    /* Jarak atas dikurangi */
-    margin-bottom: 2rem !important; /* Jarak bawah dikurangi */
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-height: 500px !important;
-    width: auto !important;
-  }
-
-  /* Memberikan jarak ekstra jika gambar berada tepat setelah paragraf */
-  .prose p + img {
-    margin-top: 2.5rem !important;
-  }
-</style>

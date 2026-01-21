@@ -62,7 +62,14 @@ try {
   console.log("FULL DATA:", JSON.stringify(result.data?.publication?.posts?.edges));
 
   if (result.data?.publication?.posts?.edges) {
-    latestPosts = result.data.publication.posts.edges.map(edge => edge.node).slice(0, 3);
+    latestPosts = result.data.publication.posts.edges.map(edge => {
+      const node = edge.node;
+      if (node.slug === 'hands-on-exploration-of-amazon-ec2-infrastructure') {
+         node.slug = 'hands-on-exploration-of-amazon-ec2';
+         node.title = node.title.replace(' Infrastructure', '');
+      }
+      return node;
+    }).slice(0, 3);
     console.log("HOMEPAGE FETCHED POSTS:", latestPosts.map(p => p.title));
   } else {
     console.log("Homepage: No posts found or API error", result);
