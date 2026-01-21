@@ -44,11 +44,11 @@ if (!contentItem) {
 ---
 
 <BaseLayout title={contentItem.title}>
-  <article class="prose dark:prose-invert prose-lg mx-auto mt-10 mb-20 prose-img:max-h-[500px] prose-img:w-auto prose-img:mx-auto prose-img:rounded-xl prose-img:shadow-lg">
+  <article class="prose dark:prose-invert prose-lg mx-auto mt-10 mb-20 prose-img:max-h-[500px] prose-img:w-auto prose-img:mx-auto prose-img:rounded-xl prose-img:shadow-lg prose-img:my-12">
     
     <header class="mb-10 text-center border-b border-gray-200 dark:border-gray-800 pb-8">
       {contentItem.coverImage?.url && (
-          <img src={contentItem.coverImage.url} alt={contentItem.title} class="w-full max-h-[400px] object-cover rounded-xl shadow-md mb-8" />
+          <img src={contentItem.coverImage.url} alt={contentItem.title} class="w-full max-h-[400px] object-cover rounded-xl shadow-md my-10" />
       )}
       <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{contentItem.title}</h1>
       {contentItem.publishedAt && (
@@ -68,3 +68,21 @@ if (!contentItem) {
 
   </article>
 </BaseLayout>
+
+<style is:global>
+  /* Menargetkan semua gambar di dalam div konten */
+  .prose img {
+    margin-top: 2rem !important;    /* Jarak atas dikurangi */
+    margin-bottom: 2rem !important; /* Jarak bawah dikurangi */
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-height: 500px !important;
+    width: auto !important;
+  }
+
+  /* Memberikan jarak ekstra jika gambar berada tepat setelah paragraf */
+  .prose p + img {
+    margin-top: 2.5rem !important;
+  }
+</style>
